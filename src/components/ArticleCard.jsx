@@ -9,13 +9,7 @@ import { Link } from "react-router-dom";
 
 const ArticleCard = ({ article, setArticle }) => {
   return (
-    <Card
-      sx={{ maxWidth: 345 }}
-      className=" hover:shadow-xl"
-      onClick={() => {
-        setArticle(article.article_id);
-      }}
-    >
+    <Card sx={{ maxWidth: 345 }} className=" hover:shadow-xl">
       <CardMedia
         sx={{ height: 140 }}
         image={article.article_img_url}
