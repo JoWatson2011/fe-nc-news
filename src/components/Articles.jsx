@@ -1,7 +1,7 @@
 import { getRequest } from "../utils/api";
 import { useEffect } from "react";
 import ArticleCard from "./ArticleCard";
-const Articles = ({ listArticles, setlistArticles }) => {
+const Articles = ({ listArticles, setlistArticles, setArticle }) => {
   useEffect(() => {
     getRequest("/api/articles")
       .then(({ articles }) => {
@@ -13,7 +13,13 @@ const Articles = ({ listArticles, setlistArticles }) => {
   return (
     <div className=" grid-flow-col  space-y-8 ml-20">
       {listArticles.map((article) => {
-        return <ArticleCard article={article} />;
+        return (
+          <ArticleCard
+            article={article}
+            key={article.article_id}
+            setArticle={setArticle}
+          />
+        );
       })}
     </div>
   );

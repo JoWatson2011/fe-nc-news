@@ -6,9 +6,15 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-const ArticleCard = ({ article }) => {
+const ArticleCard = ({ article, setArticle }) => {
   return (
-    <Card sx={{ maxWidth: 345 }} className=" hover:shadow-xl">
+    <Card
+      sx={{ maxWidth: 345 }}
+      className=" hover:shadow-xl"
+      onClick={() => {
+        setArticle(article.article_id);
+      }}
+    >
       <CardMedia
         sx={{ height: 140 }}
         image={article.article_img_url}
