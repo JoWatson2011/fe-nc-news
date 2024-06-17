@@ -5,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
 
 const ArticleCard = ({ article, setArticle }) => {
   return (
@@ -35,7 +36,9 @@ const ArticleCard = ({ article, setArticle }) => {
       </CardContent>
       <CardActions>
         <Button size="small">+1</Button>
-        <Button size="small">Read More</Button>
+        <Link to={`/articles/${article.article_id}`}>
+          <Button size="small">Read More</Button>
+        </Link>
       </CardActions>
     </Card>
   );
