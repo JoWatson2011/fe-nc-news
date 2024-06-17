@@ -18,6 +18,14 @@ const ArticleCard = ({ article }) => {
         <Typography gutterBottom variant="h5" component="div">
           {article.title}
         </Typography>
+        <Typography
+          gutterBottom
+          variant="p"
+          component="div"
+          className=" text-red-900 text-right"
+        >
+          {article.topic[0].toUpperCase() + article.topic.slice(1)}
+        </Typography>
       </CardContent>
       <CardActions>
         <Button size="small">+1</Button>
