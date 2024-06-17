@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://nc-news-2qmw.onrender.com/api",
+  baseURL: "https://nc-news-2qmw.onrender.com",
 });
 
 export const getRequest = (endpoint, params = {}) => {
