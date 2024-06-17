@@ -1,7 +1,7 @@
 import { getRequest } from "../utils/api";
 import { useEffect } from "react";
 import ArticleCard from "./ArticleCard";
-const Articles = ({ listArticles, setlistArticles, setArticle }) => {
+const Articles = ({ listArticles, setlistArticles }) => {
   useEffect(() => {
     getRequest("/api/articles")
       .then(({ articles }) => {
@@ -17,7 +17,6 @@ const Articles = ({ listArticles, setlistArticles, setArticle }) => {
           <ArticleCard
             article={article}
             key={article.article_id}
-            setArticle={setArticle}
           />
         );
       })}
