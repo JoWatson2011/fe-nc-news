@@ -1,7 +1,7 @@
-const LikeButton = ({ likes }) => {
+const LikeButton = ({ article }) => {
   return (
-    <button className="px-4 py-2 font-bold text-white bg-orange-800 rounded-full">
-      {likes}
+    <button className="w-12 h-12 font-bold text-white bg-orange-800 rounded-full">
+      {article.votes}
     </button>
   );
 };
