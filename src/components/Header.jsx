@@ -9,8 +9,8 @@ const Header = () => {
         className="grid grid-cols-5
       ]"
       >
-        <hr className=" border-red-400 border-4 col-span-4 mr-10"></hr>
-        <p className="grid col-span-1">MENU</p>
+        <hr className=" border-red-700 border-2 col-span-4 mr-10"></hr>
+        <p className="grid col-span-1 text-red-700">MENU</p>
       </div>
     </div>
   );
