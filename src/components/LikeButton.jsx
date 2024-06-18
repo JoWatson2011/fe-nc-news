@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { patchRequest } from "../utils/api";
 const LikeButton = ({ postWithVotes, setFunction }) => {
   let displayText = postWithVotes.votes;
 
@@ -7,10 +7,8 @@ const LikeButton = ({ postWithVotes, setFunction }) => {
     : "article";
   const postId = postWithVotes[`${postType}_id`];
 
-
   const patchVote = (postId, value) => {
     setFunction((currPosts) => {
-      console.log(currPosts);
       if (!Array.isArray(currPosts) & (postType === "article")) {
         return { ...currPosts, votes: currPosts.votes + value };
       }
@@ -23,6 +21,14 @@ const LikeButton = ({ postWithVotes, setFunction }) => {
       });
     });
 
+    const patchUrl =
+      postType === "comment"
+        ? `/api/comments/${postId}`
+        : `/api/articles/${postId}`;
+
+    patchRequest(patchUrl, { votes: postWithVotes.votes + value }).then(() => {
+      console.log("patch request for " + postType + postId);
+    });
   };
 
   return (
