@@ -22,13 +22,23 @@ const Comments = ({ article_id }) => {
       {commentsLoading ? <Loading /> : null}
       <div id="comment-cards">
         {comments.slice(0, 3).map((comment) => {
-          return <CommentCard comment={comment} setComments={setComments} />;
+          return (
+            <CommentCard
+              key={comment_id}
+              comment={comment}
+              setComments={setComments}
+            />
+          );
         })}
         {comments.length > 3 ? (
           <Collapsible contentDescriptor={" all comments"}>
             {comments.slice(3).map((comment) => {
               return (
-                <CommentCard comment={comment} setComments={setComments} />
+                <CommentCard
+                  key={comment_id}
+                  comment={comment}
+                  setComments={setComments}
+                />
               );
             })}
           </Collapsible>
