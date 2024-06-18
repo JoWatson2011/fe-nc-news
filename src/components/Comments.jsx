@@ -4,7 +4,6 @@ import CommentCard from "./CommentCards";
 import Loading from "./Loading";
 import Collapsible from "./Collabsible";
 import NavButton from "./NavButton";
-import { Nav } from "react-bootstrap";
 const Comments = ({ article_id }) => {
   const [comments, setComments] = useState([]);
   const [commentsLoading, setCommentsLoading] = useState(true);
@@ -23,7 +22,7 @@ const Comments = ({ article_id }) => {
       {commentsLoading ? <Loading /> : null}
       <div id="comment-cards">
         {comments.slice(0, 3).map((comment) => {
-          return <CommentCard comment={comment} />;
+          return <CommentCard comment={comment} setComments={setComments} />;
         })}
         {comments.length > 3 ? (
           <Collapsible contentDescriptor={" all comments"}>
