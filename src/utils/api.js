@@ -9,3 +9,8 @@ export const getRequest = (endpoint, params = {}) => {
     return data;
   });
 };
+export const patchRequest = (endpoint, params = {}) => {
+  return instance.patch(endpoint, params).then(({ data }) => {
+    return data;
+  });
+};
