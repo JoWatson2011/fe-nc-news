@@ -8,7 +8,12 @@ const ArticlesContainer = () => {
   const [listArticles, setlistArticles] = useState([]);
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route
+        path="/"
+        element={
+          <Home listArticles={listArticles} setlistArticles={setlistArticles} />
+        }
+      />
       <Route
         path="/articles/:topic?"
         element={

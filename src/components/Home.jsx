@@ -3,8 +3,8 @@ import { getRequest } from "../utils/api";
 import { useEffect, useState } from "react";
 import NavButton from "./NavButton";
 import { Link } from "react-router-dom";
-const Home = () => {
-  const [topArticles, setTopArticles] = useState([]);
+const Home = ({ listArticles, setlistArticles }) => {
+  // const [topArticles, setTopArticles] = useState([]);
   const months = [
     "January",
     "February",
@@ -23,7 +23,7 @@ const Home = () => {
 
   useEffect(() => {
     getRequest("/api/articles?sort_by=votes&limit=3").then(({ articles }) => {
-      setTopArticles(articles);
+      setlistArticles(articles);
     });
   }, []);
 
@@ -34,7 +34,7 @@ const Home = () => {
       } ${date.getFullYear()}`}</p>
       <p className="font-mono mb-5">Today's top articles</p>
       <div className="grid-flow-col  space-y-8 ml-20">
-        {topArticles.map((article) => {
+        {listArticles.map((article) => {
           return <ArticleCard article={article} key={article.article_id} />;
         })}
         <Link to="/articles">
