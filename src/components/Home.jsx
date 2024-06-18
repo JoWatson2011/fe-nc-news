@@ -4,7 +4,13 @@ import Loading from "./Loading";
 import { getRequest } from "../utils/api";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-const Home = ({ listArticles, setlistArticles, isLoading, setIsLoading }) => {
+const Home = ({
+  listArticles,
+  setlistArticles,
+  isLoading,
+  setIsLoading,
+  setArticle,
+}) => {
   const months = [
     "January",
     "February",
@@ -37,7 +43,13 @@ const Home = ({ listArticles, setlistArticles, isLoading, setIsLoading }) => {
       <div className="grid-flow-col  space-y-8 ml-20">
         {isLoading ? <Loading /> : null}
         {listArticles.map((article) => {
-          return <ArticleCard article={article} key={article.article_id} />;
+          return (
+            <ArticleCard
+              article={article}
+              setArticle={setlistArticles}
+              key={article.article_id}
+            />
+          );
         })}
         {!isLoading ? (
           <Link to="/articles">
