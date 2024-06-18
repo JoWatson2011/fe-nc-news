@@ -21,7 +21,12 @@ const Articles = ({
     <div className=" grid-flow-col  space-y-8 ml-20">
       {isLoading ? <Loading /> : null}
       {listArticles.map((article) => {
-        return <ArticleCard article={article} />;
+        return (
+          <ArticleCard
+            article={article}
+            key={article.article_id}
+          />
+        );
       })}
     </div>
   );

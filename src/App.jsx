@@ -5,7 +5,7 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
-      <ArticlesContainer />
+      <ArticlesContainer className = "ml-20"/>
     </BrowserRouter>
   );
 }
