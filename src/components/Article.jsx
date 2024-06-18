@@ -33,7 +33,7 @@ const Article = ({ article, setArticle }) => {
       </Link>
       <br />
       <br />
-      <Comments article_id={article.article_id} />
+      <Comments article_id={article_id} />
     </div>
   );
 };
