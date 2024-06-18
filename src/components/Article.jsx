@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getRequest } from "../utils/api";
 import LikeButton from "./LikeButton";
+import Comments from "./Comments";
 const Article = ({ article, setArticle }) => {
   const { article_id } = useParams();
 
@@ -32,6 +33,7 @@ const Article = ({ article, setArticle }) => {
       </Link>
       <br />
       <br />
+      <Comments article_id={article_id} />
     </div>
   );
 };
