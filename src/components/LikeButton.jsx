@@ -8,27 +8,33 @@ const LikeButton = ({ postWithVotes, setFunction }) => {
   const postId = postWithVotes[`${postType}_id`];
 
   const patchVote = (postId, value) => {
-    setFunction((currPosts) => {
-      if (!Array.isArray(currPosts) & (postType === "article")) {
-        return { ...currPosts, votes: currPosts.votes + value };
-      }
-
-      return currPosts.map((post) => {
-        if (post[`${postType}_id`] === postId) {
-          return { ...post, votes: post.votes + value };
+    const setVoteInState = (value) => {
+      setFunction((currPosts) => {
+        if (!Array.isArray(currPosts) & (postType === "article")) {
+          return { ...currPosts, votes: currPosts.votes + value };
         }
-        return post;
+
+        return currPosts.map((post) => {
+          if (post[`${postType}_id`] === postId) {
+            return { ...post, votes: post.votes + value };
+          }
+          return post;
+        });
       });
-    });
+    };
+
+    setVoteInState(value);
 
     const patchUrl =
       postType === "comment"
         ? `/api/comments/${postId}`
         : `/api/articles/${postId}`;
 
-    patchRequest(patchUrl, { votes: postWithVotes.votes + value }).then(() => {
-      console.log("patch request for " + postType + postId);
-    });
+    patchRequest(patchUrl, { votes: value }).catch(
+      (err) => {
+        setVoteInState(-value);
+      }
+    );
   };
 
   return (
