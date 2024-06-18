@@ -6,16 +6,29 @@ import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
 const ArticlesContainer = () => {
   const [listArticles, setlistArticles] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [article, setArticle] = useState({});
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route
+        path="/"
+        element={
+          <Home
+            listArticles={listArticles}
+            setlistArticles={setlistArticles}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+          />
+        }
+      />
       <Route
         path="/articles"
         element={
           <Articles
             listArticles={listArticles}
             setlistArticles={setlistArticles}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
           />
         }
       />
