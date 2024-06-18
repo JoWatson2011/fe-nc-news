@@ -6,12 +6,18 @@ import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
 const ArticlesContainer = () => {
   const [listArticles, setlistArticles] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   return (
     <Routes>
       <Route
         path="/"
         element={
-          <Home listArticles={listArticles} setlistArticles={setlistArticles} />
+          <Home
+            listArticles={listArticles}
+            setlistArticles={setlistArticles}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+          />
         }
       />
       <Route
@@ -20,6 +26,8 @@ const ArticlesContainer = () => {
           <Articles
             listArticles={listArticles}
             setlistArticles={setlistArticles}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
           />
         }
       />
