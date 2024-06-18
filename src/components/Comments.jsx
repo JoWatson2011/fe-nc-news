@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { getRequest } from "../utils/api";
 import CommentCard from "./CommentCards";
 import Loading from "./Loading";
+import Collapsible from "./Collabsible";
+import NavButton from "./NavButton";
+import { Nav } from "react-bootstrap";
 const Comments = ({ article_id }) => {
   const [comments, setComments] = useState([]);
   const [commentsLoading, setCommentsLoading] = useState(true);
@@ -19,9 +22,16 @@ const Comments = ({ article_id }) => {
       <h3>Comments</h3>
       {commentsLoading ? <Loading /> : null}
       <div id="comment-cards">
-        {comments.map((comment) => {
+        {comments.slice(0, 3).map((comment) => {
           return <CommentCard comment={comment} />;
         })}
+        {comments.length > 3 ? (
+          <Collapsible contentDescriptor={" all comments"}>
+            {comments.slice(3).map((comment) => {
+              return <CommentCard comment={comment} />;
+            })}
+          </Collapsible>
+        ) : null}
       </div>
     </div>
   );
