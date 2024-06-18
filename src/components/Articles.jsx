@@ -13,7 +13,12 @@ const Articles = ({ listArticles, setlistArticles }) => {
   return (
     <div className=" grid-flow-col  space-y-8 ml-20">
       {listArticles.map((article) => {
-        return <ArticleCard article={article} />;
+        return (
+          <ArticleCard
+            article={article}
+            key={article.article_id}
+          />
+        );
       })}
     </div>
   );
