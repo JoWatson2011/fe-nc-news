@@ -1,16 +1,17 @@
-import Card from "react-bootstrap/Card";
 import LikeButton from "./LikeButton";
 
 function CommentCard({ comment }) {
   return (
-    <Card>
-      <Card.Header as="h4">{comment.author}</Card.Header>
-      <Card.Body className=" grid grid-rows-1">
-        <LikeButton currentVotes={comment.votes} />
-        <Card.Text data-cy="date">{comment.created_at.slice(0, 10)}</Card.Text>
-        <Card.Text data-cy="body">{comment.body}</Card.Text>
-      </Card.Body>
-    </Card>
+    <div className=" m-10 grid grid-rows-2 grid-cols-3 border-s-black border p-2">
+      <h4 className=" font-bold">{comment.author}</h4>
+      <p className=" italic" data-cy="date">
+        {comment.created_at.slice(0, 10)}
+      </p>
+      <LikeButton className=" row-span-2" currentVotes={comment.votes} />
+      <p className=" col-span-2" data-cy="body">
+        {comment.body}
+      </p>
+    </div>
   );
 }
 

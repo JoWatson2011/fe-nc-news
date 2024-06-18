@@ -570,12 +570,20 @@ video {
   grid-column: span 5 / span 5;
 }
 
+.col-span-3 {
+  grid-column: span 3 / span 3;
+}
+
 .row-span-2 {
   grid-row: span 2 / span 2;
 }
 
 .m-10 {
   margin: 2.5rem;
+}
+
+.m-4 {
+  margin: 1rem;
 }
 
 .ml-20 {
@@ -734,6 +742,10 @@ video {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .grid-rows-2 {
   grid-template-rows: repeat(2, minmax(0, 1fr));
 }
@@ -834,6 +846,11 @@ video {
 .border-black {
   --tw-border-opacity: 1;
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
+}
+
+.border-s-black {
+  --tw-border-opacity: 1;
+  border-inline-start-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
 .bg-blue-500 {
