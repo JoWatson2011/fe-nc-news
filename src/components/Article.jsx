@@ -15,14 +15,12 @@ const Article = ({ article, setArticle }) => {
   }, [article_id]);
 
   return (
-    <div className="ml-10 mr-10 ">
-      <div className="grid grid-cols-5 grid-rows-2 mr-0 ">
-        <h2 className="col-span-4 font-mono text-[40px]">{article.title}</h2>
-        <LikeButton className="row-span-2 col-span-1" article={article} />
-        <p className=" text-red-900 col-span-5">
-          Posted on {article.created_at} by {article.author}
-        </p>
-      </div>
+    <div className="ml-10 mr-10 max-w-700">
+      <h2 className="font-mono text-[40px]">{article.title}</h2>
+      <LikeButton article={article} />
+      <p className=" text-red-900">
+        Posted on {article.created_at} by {article.author}
+      </p>
       <img src={article.article_img_url} />
       <br />
       <p>{article.body}</p>
