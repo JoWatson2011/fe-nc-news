@@ -18,7 +18,7 @@ const Article = ({ article, setArticle }) => {
   return (
     <div className="ml-10 mr-10 max-w-700">
       <h2 className="font-mono text-[40px]">{article.title}</h2>
-      <LikeButton currentVotes={article.votes} />
+      <LikeButton postWithVotes={article} setFunction = {setArticle}/>
       <p className=" text-red-900">
         Posted on {article.created_at} by {article.author}
       </p>

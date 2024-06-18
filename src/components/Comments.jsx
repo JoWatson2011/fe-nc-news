@@ -28,7 +28,9 @@ const Comments = ({ article_id }) => {
         {comments.length > 3 ? (
           <Collapsible contentDescriptor={" all comments"}>
             {comments.slice(3).map((comment) => {
-              return <CommentCard comment={comment} />;
+              return (
+                <CommentCard comment={comment} setComments={setComments} />
+              );
             })}
           </Collapsible>
         ) : null}
