@@ -4,6 +4,8 @@ import CommentCard from "./CommentCards";
 import Loading from "./Loading";
 import Collapsible from "./Collabsible";
 import NavButton from "./NavButton";
+import PostCommentBox from "./PostCommentBox";
+
 const Comments = ({ article_id }) => {
   const [comments, setComments] = useState([]);
   const [commentsLoading, setCommentsLoading] = useState(true);
@@ -19,6 +21,8 @@ const Comments = ({ article_id }) => {
   return (
     <div>
       <h3>Comments</h3>
+      <PostCommentBox />
+
       {commentsLoading ? <Loading /> : null}
       <div id="comment-cards">
         {comments.slice(0, 3).map((comment) => {

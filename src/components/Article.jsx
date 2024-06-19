@@ -3,7 +3,6 @@ import { useParams, Link } from "react-router-dom";
 import { getRequest } from "../utils/api";
 import LikeButton from "./LikeButton";
 import Comments from "./Comments";
-import PostCommentBox from "./PostCommentBox";
 const Article = ({ article, setArticle }) => {
   const { article_id } = useParams();
 
@@ -37,7 +36,6 @@ const Article = ({ article, setArticle }) => {
       </Link>
       <br />
 
-      <PostCommentBox />
       <Comments article_id={article_id} />
     </div>
   );
