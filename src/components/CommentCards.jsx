@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import LikeButton from "./LikeButton";
+import { UserContext } from "../contexts/UserContext";
 
 function CommentCard({ comment, setComments }) {
+  const { user } = useContext(UserContext);
+
   return (
     <div className=" m-10 grid grid-rows-2 grid-cols-3 border-s-black border p-2">
       <h4 className=" font-bold">{comment.author}</h4>
