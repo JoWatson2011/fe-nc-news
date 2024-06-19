@@ -14,3 +14,8 @@ export const patchRequest = (endpoint, params = {}) => {
     return data;
   });
 };
+export const postRequest = (endpoint, params = {}) => {
+  return instance.post(endpoint, params).then(({ data }) => {
+    return data;
+  });
+};
