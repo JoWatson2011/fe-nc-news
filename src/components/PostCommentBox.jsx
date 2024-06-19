@@ -66,6 +66,7 @@ const PostCommentBox = ({
           className={commentBoxStyle}
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
+          required
         />
       </label>
       <button
