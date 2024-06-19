@@ -24,6 +24,7 @@ const Articles = ({
         return (
           <ArticleCard
             article={article}
+            setArticle={setlistArticles}
             key={article.article_id}
           />
         );

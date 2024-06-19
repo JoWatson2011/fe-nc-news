@@ -6,6 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
+import LikeButton from "./LikeButton";
 
 const ArticleCard = ({ article, setArticle }) => {
   return (
@@ -29,7 +30,7 @@ const ArticleCard = ({ article, setArticle }) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">+1</Button>
+        <LikeButton postWithVotes={article} setFunction={setArticle} />
         <Link to={`/articles/${article.article_id}`}>
           <Button size="small">Read More</Button>
         </Link>
