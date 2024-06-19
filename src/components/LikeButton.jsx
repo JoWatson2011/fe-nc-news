@@ -38,7 +38,7 @@ const LikeButton = ({ postWithVotes, setFunction }) => {
   };
 
   return (
-    <div className="flex gap-x-2 items-center">
+    <div className="flex gap-x-2 place-items-center">
       <button
         className="w-8 h-8 font-bold text-white bg-orange-800 rounded-full  hover:bg-red-500 active:bg-red-300"
         onClick={() => {
@@ -47,7 +47,7 @@ const LikeButton = ({ postWithVotes, setFunction }) => {
       >
         -1
       </button>
-      <p className=" text-xl font-bold">{displayText}</p>
+      <p className="w-10 h-10 p-1 rounded-full border text-l font-bold text-center leading-7">{displayText}</p>
       <button
         className="w-8 h-8 font-bold text-white bg-green-950 rounded-full  hover:bg-green-700 active:bg-green-300"
         onClick={() => {
