@@ -2,18 +2,21 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import { postRequest } from "../utils/api";
-const PostCommentBox = () => {
+const PostCommentBox = ({
+  postSuccessful,
+  setPostSuccessful,
+  newComment,
+  setNewComment,
+}) => {
   const { article_id } = useParams();
 
   const { user } = useContext(UserContext);
 
   const [commentFocus, setCommentFocus] = useState(false);
-  const [newComment, setNewComment] = useState("");
   const [commentBoxSize, setCommentBoxSize] = useState("1");
   const [commentBoxStyle, setCommentBoxStyle] = useState(
     "p-1 border border-gray-700 rounded-full"
   );
-  const [postSuccessful, setPostSuccessful] = useState(false);
 
   useEffect(() => {
     if (commentFocus) {
@@ -35,8 +38,10 @@ const PostCommentBox = () => {
       params: { article_id },
     })
       .then(() => {
-        setNewComment("");
         setPostSuccessful(true);
+      })
+      .then(() => {
+        setNewComment("");
       })
       .catch((err) => {
         console.log(err);

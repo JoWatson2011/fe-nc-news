@@ -9,6 +9,9 @@ import PostCommentBox from "./PostCommentBox";
 const Comments = ({ article_id }) => {
   const [comments, setComments] = useState([]);
   const [commentsLoading, setCommentsLoading] = useState(true);
+  const [postSuccessful, setPostSuccessful] = useState(false);
+  const [newComment, setNewComment] = useState("");
+
   useEffect(() => {
     getRequest(`/api/articles/${article_id}/comments`, {
       params: { article_id },
@@ -16,12 +19,27 @@ const Comments = ({ article_id }) => {
       setComments(comments);
       setCommentsLoading(false);
     });
-  }, []);
+  }, [postSuccessful]);
+
+  useEffect(() => {
+    if (postSuccessful) {
+      setComments((currComments) => {
+        const newArr = [...currComments];
+        newArr.push(newComment);
+        return newArr;
+      });
+    }
+  }, [postSuccessful]);
 
   return (
     <div>
       <h3>Comments</h3>
-      <PostCommentBox />
+      <PostCommentBox
+        postSuccessful={postSuccessful}
+        setPostSuccessful={setPostSuccessful}
+        newComment={newComment}
+        setNewComment={setNewComment}
+      />
 
       {commentsLoading ? <Loading /> : null}
       <div id="comment-cards">
