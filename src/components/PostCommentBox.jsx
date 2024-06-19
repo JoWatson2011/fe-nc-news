@@ -1,13 +1,19 @@
 import { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
+import { postRequest } from "../utils/api";
 const PostCommentBox = () => {
+  const { article_id } = useParams();
+
   const { user } = useContext(UserContext);
+
   const [commentFocus, setCommentFocus] = useState(false);
   const [newComment, setNewComment] = useState("");
   const [commentBoxSize, setCommentBoxSize] = useState("1");
   const [commentBoxStyle, setCommentBoxStyle] = useState(
     "p-1 border border-gray-700 rounded-full"
   );
+  const [postSuccessful, setPostSuccessful] = useState(false);
 
   useEffect(() => {
     if (commentFocus) {
@@ -21,6 +27,21 @@ const PostCommentBox = () => {
 
   const handlePostComment = (e) => {
     e.preventDefault();
+
+    postRequest(`/api/articles/${article_id}/comments`, {
+      body: newComment,
+      article_id: article_id,
+      username: user,
+      params: { article_id },
+    })
+      .then(() => {
+        setNewComment("");
+        setPostSuccessful(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        setPostSuccessful(false);
+      });
   };
 
   return (
@@ -52,8 +73,9 @@ const PostCommentBox = () => {
         }}
         className=" m-2 p-2 bg-red-50 rounded-full"
       >
-        Post
+        Post Comment
       </button>
+      {postSuccessful ? <p>Comment posted</p> : null}
     </form>
   );
 };
