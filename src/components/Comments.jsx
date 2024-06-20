@@ -9,8 +9,8 @@ import PostCommentBox from "./PostCommentBox";
 const Comments = ({ article_id }) => {
   const [comments, setComments] = useState([]);
   const [commentsLoading, setCommentsLoading] = useState(true);
-  const [postSuccessful, setPostSuccessful] = useState(false);
-  const [deleteSuccessful, setDeleteSuccessful] = useState(false);
+  const [postSuccessful, setPostSuccessful] = useState(0);
+  const [deleteSuccessful, setDeleteSuccessful] = useState(0);
 
   const [newComment, setNewComment] = useState("");
 
@@ -18,7 +18,7 @@ const Comments = ({ article_id }) => {
     getRequest(`/api/articles/${article_id}/comments`, {
       params: { article_id },
     }).then(({ comments }) => {
-      setComments(comments);
+      setComments(comments)
       setCommentsLoading(false);
     });
   }, [postSuccessful, deleteSuccessful]);

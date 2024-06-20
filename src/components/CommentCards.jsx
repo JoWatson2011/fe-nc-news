@@ -11,8 +11,10 @@ function CommentCard({ comment, setComments, setDeleteSuccessful }) {
     deleteRequest(`/api/comments/${comment_id}`, {
       params: { comment_id },
     }).then(() => {
+      setDeleteSuccessful((currValue) => {
+        return currValue + 1;
+      });
       setComments((currComments) => {
-        setDeleteSuccessful(true);
         console.log(comment_id, "deleted!");
         const newArr = [...currComments];
         return newArr.filter((comment) => {
