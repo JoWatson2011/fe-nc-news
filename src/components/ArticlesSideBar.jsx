@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 
-export default function ArticleSidebar({ topics, currentTopic }) {
+export default function ArticleSidebar({setSortBy, topics, currentTopic }) {
   const [expanded, setExpanded] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -19,6 +19,10 @@ export default function ArticleSidebar({ topics, currentTopic }) {
     }
     return () => window.removeEventListener("resize", handleWindowResize);
   }, [window.innerWidth]);
+
+  const handleSortChange = (e) => {
+    setSortBy(e.target.value);
+  };
 
   return (
     <div className="ml-10">
@@ -61,6 +65,28 @@ export default function ArticleSidebar({ topics, currentTopic }) {
                 );
               })}
             </ul>
+          </section>
+          <section className=" p-8">
+            <h4 className="mb-4 font-bold mt-4">Sort By</h4>
+            <hr></hr>
+            <input
+              type="radio"
+              name="sort-by"
+              id="newest"
+              key="newest"
+              value="sort_by=created_at&order=desc"
+              onChange={handleSortChange}
+            />
+            <label htmlFor="newest">Newest</label>
+            <input
+              type="radio"
+              name="sort-by"
+              id="oldest"
+              key="oldest"
+              value="sort_by=created_at&order=asc"
+              onChange={handleSortChange}
+            />
+            <label htmlFor="oldest">Oldest</label>
           </section>
         </div>
       ) : null}
