@@ -38,7 +38,9 @@ const PostCommentBox = ({
       params: { article_id },
     })
       .then(() => {
-        setPostSuccessful(true);
+        setPostSuccessful((currValue) => {
+          return currValue + 1;
+        });
       })
       .then(() => {
         setNewComment("");

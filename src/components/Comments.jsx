@@ -9,17 +9,19 @@ import PostCommentBox from "./PostCommentBox";
 const Comments = ({ article_id }) => {
   const [comments, setComments] = useState([]);
   const [commentsLoading, setCommentsLoading] = useState(true);
-  const [postSuccessful, setPostSuccessful] = useState(false);
+  const [postSuccessful, setPostSuccessful] = useState(0);
+  const [deleteSuccessful, setDeleteSuccessful] = useState(0);
+
   const [newComment, setNewComment] = useState("");
 
   useEffect(() => {
     getRequest(`/api/articles/${article_id}/comments`, {
       params: { article_id },
     }).then(({ comments }) => {
-      setComments(comments);
+      setComments(comments)
       setCommentsLoading(false);
     });
-  }, [postSuccessful]);
+  }, [postSuccessful, deleteSuccessful]);
 
   useEffect(() => {
     if (postSuccessful) {
@@ -49,6 +51,7 @@ const Comments = ({ article_id }) => {
               key={comment.comment_id}
               comment={comment}
               setComments={setComments}
+              setDeleteSuccessful={setDeleteSuccessful}
             />
           );
         })}
@@ -60,6 +63,7 @@ const Comments = ({ article_id }) => {
                   key={comment.comment_id}
                   comment={comment}
                   setComments={setComments}
+                  setDeleteSuccessful={setDeleteSuccessful}
                 />
               );
             })}
