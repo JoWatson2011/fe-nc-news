@@ -1,9 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getRequest } from "../utils/api";
 import LikeButton from "./LikeButton";
 import Comments from "./Comments";
+import ErrorComponent from "./ErrorComponent";
 const Article = ({ article, setArticle }) => {
+  const [error, setError] = useState(null);
+
   const { article_id } = useParams();
 
   useEffect(() => {
@@ -12,8 +15,13 @@ const Article = ({ article, setArticle }) => {
         article.created_at = article.created_at.slice(0, 10);
         setArticle(article);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setError(err);
+      });
   }, [article_id]);
+
+  if (error) return <ErrorComponent error={error} />;
 
   return (
     <div className="ml-10 mr-10 max-w-700">
