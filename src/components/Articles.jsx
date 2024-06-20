@@ -13,6 +13,7 @@ const Articles = ({
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentTopic, setCurrentTopic] = useState(searchParams.get("topic"));
   const [currentTopicDescription, setCurrentTopicDescription] = useState("");
+  const [topics, setTopics] = useState([]);
 
   const getRequestURL = currentTopic
     ? `/api/articles?topic=${currentTopic}`
@@ -30,6 +31,8 @@ const Articles = ({
 
   useEffect(() => {
     getRequest("/api/topics").then(({ topics }) => {
+      setTopics(topics);
+
       const currentTopicApi = topics.filter((apiTopic) => {
         return apiTopic.slug === currentTopic;
       });
@@ -51,7 +54,7 @@ const Articles = ({
         <h3 className="ml-10 mb-10 font-mono">{currentTopicDescription}</h3>
       ) : null}
       <div className="flex">
-        <ArticlesSideBar />
+        <ArticlesSideBar topics={topics} currentTopic ={currentTopic}/>
         <div className=" grid-flow-col  space-y-8 ml-20">
           {isLoading ? <Loading /> : null}
           {listArticles.map((article) => {
