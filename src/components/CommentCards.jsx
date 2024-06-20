@@ -35,14 +35,16 @@ function CommentCard({ comment, setComments, setDeleteSuccessful }) {
       <p className=" col-span-2" data-cy="body">
         {comment.body}
       </p>
-      <button
-        type="button"
-        onClick={handleDeleteComment}
-        className=" hover:bg-red-900 rounded-full border"
-        value={comment.comment_id}
-      >
-        Delete comment
-      </button>
+      {user === comment.author ? (
+        <button
+          type="button"
+          onClick={handleDeleteComment}
+          className=" hover:bg-red-900 rounded-full border"
+          value={comment.comment_id}
+        >
+          Delete comment
+        </button>
+      ) : null}
     </div>
   );
 }
