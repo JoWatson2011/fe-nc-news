@@ -15,16 +15,18 @@ const Articles = ({
   const [currentTopic, setCurrentTopic] = useState(searchParams.get("topic"));
   const [currentTopicDescription, setCurrentTopicDescription] = useState("");
   const [topics, setTopics] = useState([]);
-  const [sortBy, setSortBy] = useState("");
+  const [sortBy, setSortBy] = useState(searchParams.get("sort_by"));
+  const [order, setOrder] = useState(searchParams.get("order"));
   const [error, setError] = useState(null);
-
+  console.log(sortBy);
   useEffect(() => {
     let getRequestURL = "/api/articles?";
     getRequestURL += currentTopic ? `topic=${currentTopic}` : "";
 
     getRequestURL += currentTopic && sortBy ? "&" : "";
 
-    getRequestURL += sortBy ? sortBy : "";
+    getRequestURL += sortBy ? `sort_by=${sortBy}` : "";
+    getRequestURL += order & sortBy ? `&order=${order}` : "";
 
     getRequest(getRequestURL)
       .then(({ articles }) => {
@@ -66,9 +68,10 @@ const Articles = ({
           topics={topics}
           currentTopic={currentTopic}
           setSortBy={setSortBy}
+          setOrder={setOrder}
         />
         {error ? (
-          <ErrorComponent />
+          <ErrorComponent error={error} />
         ) : (
           <div className=" grid-flow-col  space-y-8 ml-20">
             {isLoading ? <Loading /> : null}
