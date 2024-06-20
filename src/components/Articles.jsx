@@ -26,7 +26,7 @@ const Articles = ({
     getRequestURL += currentTopic && sortBy ? "&" : "";
 
     getRequestURL += sortBy ? `sort_by=${sortBy}` : "";
-    getRequestURL += order & sortBy ? `&order=${order}` : "";
+    getRequestURL += order && sortBy ? `&order=${order}` : "";
 
     getRequest(getRequestURL)
       .then(({ articles }) => {
