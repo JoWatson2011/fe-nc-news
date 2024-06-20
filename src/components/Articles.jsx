@@ -4,6 +4,7 @@ import { useSearchParams, Link } from "react-router-dom";
 import ArticleCard from "./ArticleCard";
 import Loading from "./Loading";
 import ArticlesSideBar from "./ArticlesSideBar";
+import ErrorComponent from "./ErrorComponent";
 const Articles = ({
   listArticles,
   setlistArticles,
@@ -15,12 +16,13 @@ const Articles = ({
   const [currentTopicDescription, setCurrentTopicDescription] = useState("");
   const [topics, setTopics] = useState([]);
   const [sortBy, setSortBy] = useState("");
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     let getRequestURL = "/api/articles?";
     getRequestURL += currentTopic ? `topic=${currentTopic}` : "";
 
-    getRequestURL += (currentTopic && sortBy) ? "&" : "";
+    getRequestURL += currentTopic && sortBy ? "&" : "";
 
     getRequestURL += sortBy ? sortBy : "";
 
@@ -29,7 +31,7 @@ const Articles = ({
         setlistArticles(articles);
         setIsLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => setError(err));
   }, [sortBy]);
 
   useEffect(() => {
@@ -49,10 +51,12 @@ const Articles = ({
         <Link to="/articles" reloadDocument="true">
           Articles
         </Link>
-        <span className=" text-red-700">
-          {" "}
-          {currentTopic ? `/ ${currentTopic}` : ""}{" "}
-        </span>
+        {error ? null : (
+          <span className=" text-red-700">
+            {" "}
+            {currentTopic ? `/ ${currentTopic}` : ""}{" "}
+          </span>
+        )}
       </h2>
       {currentTopic ? (
         <h3 className="ml-10 mb-10 font-mono">{currentTopicDescription}</h3>
@@ -63,18 +67,22 @@ const Articles = ({
           currentTopic={currentTopic}
           setSortBy={setSortBy}
         />
-        <div className=" grid-flow-col  space-y-8 ml-20">
-          {isLoading ? <Loading /> : null}
-          {listArticles.map((article) => {
-            return (
-              <ArticleCard
-                article={article}
-                setArticle={setlistArticles}
-                key={article.article_id}
-              />
-            );
-          })}
-        </div>
+        {error ? (
+          <ErrorComponent />
+        ) : (
+          <div className=" grid-flow-col  space-y-8 ml-20">
+            {isLoading ? <Loading /> : null}
+            {listArticles.map((article) => {
+              return (
+                <ArticleCard
+                  article={article}
+                  setArticle={setlistArticles}
+                  key={article.article_id}
+                />
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
