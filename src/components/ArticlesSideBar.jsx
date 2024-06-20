@@ -3,7 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 
-export default function ArticleSidebar({ setSortBy, setOrder, topics, currentTopic }) {
+export default function ArticleSidebar({
+  setSortBy,
+  setOrder,
+  topics,
+  currentTopic,
+}) {
   const [expanded, setExpanded] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const navigate = useNavigate();
@@ -34,10 +39,10 @@ export default function ArticleSidebar({ setSortBy, setOrder, topics, currentTop
     setSortBy(sort_by);
     setOrder(order);
 
-    // const navigateURL = currentTopic
-    //   ? `/articles?topic=${currentTopic}&${e.target.value.sort_by}`
-    //   : `/articles?${e.target.value}`;
-    // navigate(navigateURL);
+    const navigateURL = currentTopic
+      ? `/articles?topic=${currentTopic}&sort_by=${sort_by}&order=${order}`
+      : `/articles?sort_by=${sort_by}&order=${order}`;
+    navigate(navigateURL);
   };
 
   return (
