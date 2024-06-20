@@ -4,6 +4,7 @@ import { useSearchParams, Link } from "react-router-dom";
 import ArticleCard from "./ArticleCard";
 import Loading from "./Loading";
 import ArticlesSideBar from "./ArticlesSideBar";
+import ErrorComponent from "./ErrorComponent";
 const Articles = ({
   listArticles,
   setlistArticles,
@@ -14,22 +15,25 @@ const Articles = ({
   const [currentTopic, setCurrentTopic] = useState(searchParams.get("topic"));
   const [currentTopicDescription, setCurrentTopicDescription] = useState("");
   const [topics, setTopics] = useState([]);
-  const [sortBy, setSortBy] = useState("");
-
+  const [sortBy, setSortBy] = useState(searchParams.get("sort_by"));
+  const [order, setOrder] = useState(searchParams.get("order"));
+  const [error, setError] = useState(null);
+  console.log(sortBy);
   useEffect(() => {
     let getRequestURL = "/api/articles?";
     getRequestURL += currentTopic ? `topic=${currentTopic}` : "";
 
-    getRequestURL += (currentTopic && sortBy) ? "&" : "";
+    getRequestURL += currentTopic && sortBy ? "&" : "";
 
-    getRequestURL += sortBy ? sortBy : "";
+    getRequestURL += sortBy ? `sort_by=${sortBy}` : "";
+    getRequestURL += order && sortBy ? `&order=${order}` : "";
 
     getRequest(getRequestURL)
       .then(({ articles }) => {
         setlistArticles(articles);
         setIsLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => setError(err));
   }, [sortBy]);
 
   useEffect(() => {
@@ -49,10 +53,12 @@ const Articles = ({
         <Link to="/articles" reloadDocument="true">
           Articles
         </Link>
-        <span className=" text-red-700">
-          {" "}
-          {currentTopic ? `/ ${currentTopic}` : ""}{" "}
-        </span>
+        {error ? null : (
+          <span className=" text-red-700">
+            {" "}
+            {currentTopic ? `/ ${currentTopic}` : ""}{" "}
+          </span>
+        )}
       </h2>
       {currentTopic ? (
         <h3 className="ml-10 mb-10 font-mono">{currentTopicDescription}</h3>
@@ -62,19 +68,24 @@ const Articles = ({
           topics={topics}
           currentTopic={currentTopic}
           setSortBy={setSortBy}
+          setOrder={setOrder}
         />
-        <div className=" grid-flow-col  space-y-8 ml-20">
-          {isLoading ? <Loading /> : null}
-          {listArticles.map((article) => {
-            return (
-              <ArticleCard
-                article={article}
-                setArticle={setlistArticles}
-                key={article.article_id}
-              />
-            );
-          })}
-        </div>
+        {error ? (
+          <ErrorComponent error={error} />
+        ) : (
+          <div className=" grid-flow-col  space-y-8 ml-20">
+            {isLoading ? <Loading /> : null}
+            {listArticles.map((article) => {
+              return (
+                <ArticleCard
+                  article={article}
+                  setArticle={setlistArticles}
+                  key={article.article_id}
+                />
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );

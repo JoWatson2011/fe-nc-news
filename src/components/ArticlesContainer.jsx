@@ -4,6 +4,8 @@ import Home from "./Home";
 import PostArticle from "./PostArticle";
 import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
+import ErrorPage from "./ErrorPage";
+
 const ArticlesContainer = () => {
   const [listArticles, setlistArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -32,8 +34,12 @@ const ArticlesContainer = () => {
           />
         }
       />
-      <Route path="/articles/:article_id" element={<Article article={article} setArticle={setArticle}/>} />
+      <Route
+        path="/articles/:article_id"
+        element={<Article article={article} setArticle={setArticle} />}
+      />
       <Route path="/articles/post" element={<PostArticle />} />
+      <Route path="/*" element={<ErrorPage />} />
     </Routes>
   );
 };

@@ -3,7 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 
-export default function ArticleSidebar({ setSortBy, topics, currentTopic }) {
+export default function ArticleSidebar({
+  setSortBy,
+  setOrder,
+  topics,
+  currentTopic,
+}) {
   const [expanded, setExpanded] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const navigate = useNavigate();
@@ -21,10 +26,22 @@ export default function ArticleSidebar({ setSortBy, topics, currentTopic }) {
   }, [window.innerWidth]);
 
   const handleSortChange = (e) => {
-    setSortBy(e.target.value);
+    const sortOrderValues = {
+      newest: { sort_by: "created_at", order: "desc" },
+      oldest: { sort_by: "created_at", order: "asc" },
+      mostComments: { sort_by: "comment_count", order: "desc" },
+      leastComments: { sort_by: "comment_count", order: "asc" },
+      mostVotes: { sort_by: "votes", order: "desc" },
+      leastVotes: { sort_by: "votes", order: "asc" },
+    };
+    const { sort_by, order } = sortOrderValues[e.target.value];
+
+    setSortBy(sort_by);
+    setOrder(order);
+
     const navigateURL = currentTopic
-      ? `/articles?topic=${currentTopic}&${e.target.value}`
-      : `/articles?${e.target.value}`;
+      ? `/articles?topic=${currentTopic}&sort_by=${sort_by}&order=${order}`
+      : `/articles?sort_by=${sort_by}&order=${order}`;
     navigate(navigateURL);
   };
 
@@ -79,7 +96,7 @@ export default function ArticleSidebar({ setSortBy, topics, currentTopic }) {
                 name="sort-by"
                 id="newest"
                 key="newest"
-                value="sort_by=created_at&order=desc"
+                value={"newest"}
                 onChange={handleSortChange}
               />
               <label htmlFor="newest">Newest</label>
@@ -88,7 +105,7 @@ export default function ArticleSidebar({ setSortBy, topics, currentTopic }) {
                 name="sort-by"
                 id="oldest"
                 key="oldest"
-                value="sort_by=created_at&order=asc"
+                value={"oldest"}
                 onChange={handleSortChange}
               />
               <label htmlFor="oldest">Oldest</label>
@@ -97,7 +114,7 @@ export default function ArticleSidebar({ setSortBy, topics, currentTopic }) {
                 name="sort-by"
                 id="most-comments"
                 key="most-comments"
-                value="sort_by=comment_count&order=desc"
+                value={"mostComments"}
                 onChange={handleSortChange}
               />
               <label htmlFor="most-comments">Most comments</label>
@@ -106,7 +123,7 @@ export default function ArticleSidebar({ setSortBy, topics, currentTopic }) {
                 name="sort-by"
                 id="least-comments"
                 key="least-comments"
-                value="sort_by=comment_count&order=asc"
+                value={"leastComments"}
                 onChange={handleSortChange}
               />
               <label htmlFor="least-comments">Least comments</label>
@@ -115,7 +132,7 @@ export default function ArticleSidebar({ setSortBy, topics, currentTopic }) {
                 name="sort-by"
                 id="most-votes"
                 key="most-votes"
-                value="sort_by=votes&order=desc"
+                value={"mostVotes"}
                 onChange={handleSortChange}
               />
               <label htmlFor="most-votes">Most votes</label>
@@ -124,7 +141,7 @@ export default function ArticleSidebar({ setSortBy, topics, currentTopic }) {
                 name="sort-by"
                 id="least-votes"
                 key="least-votes"
-                value="sort_by=votes&order=asc"
+                value={"leastVotes"}
                 onChange={handleSortChange}
               />
               <label htmlFor="least-votes">Least votes</label>
