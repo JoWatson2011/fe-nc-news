@@ -10,6 +10,8 @@ const Comments = ({ article_id }) => {
   const [comments, setComments] = useState([]);
   const [commentsLoading, setCommentsLoading] = useState(true);
   const [postSuccessful, setPostSuccessful] = useState(false);
+  const [deleteSuccessful, setDeleteSuccessful] = useState(false);
+
   const [newComment, setNewComment] = useState("");
 
   useEffect(() => {
@@ -19,7 +21,7 @@ const Comments = ({ article_id }) => {
       setComments(comments);
       setCommentsLoading(false);
     });
-  }, [postSuccessful]);
+  }, [postSuccessful, deleteSuccessful]);
 
   useEffect(() => {
     if (postSuccessful) {
@@ -49,6 +51,7 @@ const Comments = ({ article_id }) => {
               key={comment.comment_id}
               comment={comment}
               setComments={setComments}
+              setDeleteSuccessful={setDeleteSuccessful}
             />
           );
         })}
@@ -60,6 +63,7 @@ const Comments = ({ article_id }) => {
                   key={comment.comment_id}
                   comment={comment}
                   setComments={setComments}
+                  setDeleteSuccessful={setDeleteSuccessful}
                 />
               );
             })}
