@@ -1,21 +1,28 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import Loading from "./Loading";
 import LikeButton from "./LikeButton";
 import { UserContext } from "../contexts/UserContext";
 import { deleteRequest } from "../utils/api";
 
 function CommentCard({ comment, setComments, setDeleteSuccessful }) {
   const { user } = useContext(UserContext);
+  const [deleteRequestSent, setDeleteRequestSent] = useState(false);
 
   const handleDeleteComment = (e) => {
+    setDeleteRequestSent(true);
+
     const comment_id = e.target.value;
+
     deleteRequest(`/api/comments/${comment_id}`, {
       params: { comment_id },
     }).then(() => {
+      setDeleteRequestSent(false);
+
       setDeleteSuccessful((currValue) => {
         return currValue + 1;
       });
+
       setComments((currComments) => {
-        console.log(comment_id, "deleted!");
         const newArr = [...currComments];
         return newArr.filter((comment) => {
           comment.comment_id != comment_id;
@@ -45,6 +52,7 @@ function CommentCard({ comment, setComments, setDeleteSuccessful }) {
           Delete comment
         </button>
       ) : null}
+      {deleteRequestSent ? <Loading /> : null}
     </div>
   );
 }
