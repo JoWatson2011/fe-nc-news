@@ -1,5 +1,6 @@
 import { getRequest } from "../utils/api";
 import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import ArticleCard from "./ArticleCard";
 import Loading from "./Loading";
 const Articles = ({
@@ -8,8 +9,16 @@ const Articles = ({
   isLoading,
   setIsLoading,
 }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const topic = searchParams.get("topic");
+
+  const getRequestURL = topic
+  ? `/api/articles?topic=${topic}`
+  : "/api/articles";
+  console.log(getRequestURL);
+
   useEffect(() => {
-    getRequest("/api/articles")
+    getRequest(getRequestURL)
       .then(({ articles }) => {
         setlistArticles(articles);
         setIsLoading(false);
