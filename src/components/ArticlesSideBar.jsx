@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-export default function ArticleSidebar({ children }) {
+
+export default function ArticleSidebar({ topics, currentTopic }) {
   const [expanded, setExpanded] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -9,8 +11,6 @@ export default function ArticleSidebar({ children }) {
     const handleWindowResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener("resize", handleWindowResize);
 
-    console.log(windowWidth);
-    // Return a function from the effect that removes the event listener
     if (windowWidth < 430) {
       // Width of Samsung Galazy S20 Ultra
       setExpanded(false);
@@ -21,7 +21,7 @@ export default function ArticleSidebar({ children }) {
   }, [window.innerWidth]);
 
   return (
-    <div>
+    <div className="ml-10">
       {expanded ? null : (
         <button
           type="button"
@@ -33,7 +33,7 @@ export default function ArticleSidebar({ children }) {
         </button>
       )}
       {expanded ? (
-        <div>
+        <div className="border border-box rounded">
           <button
             type="button"
             onClick={() => {
@@ -42,9 +42,26 @@ export default function ArticleSidebar({ children }) {
           >
             <KeyboardArrowLeftIcon />
           </button>
-          <menu name="Topics">
-             
-          </menu>
+          <menu name="Topics"></menu>
+
+          <section className=" p-8">
+            <h4 className="mb-4 font-bold mt-4">Topics</h4>
+            <hr></hr>
+            <ul>
+              {topics.map((topic) => {
+                const topicSelectedClass =
+                  currentTopic === topic.slug ? "font-bold text-red-700" : "";
+                return (
+                  <Link
+                    to={`/articles?topic=${topic.slug}`}
+                    reloadDocument="true"
+                  >
+                    <li className={topicSelectedClass}>{topic.slug}</li>
+                  </Link>
+                );
+              })}
+            </ul>
+          </section>
         </div>
       ) : null}
     </div>
