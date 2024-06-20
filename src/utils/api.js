@@ -19,3 +19,8 @@ export const postRequest = (endpoint, params = {}) => {
     return data;
   });
 };
+export const deleteRequest = (endpoint, params = {}) => {
+  return instance.delete(endpoint, params).then(({ data }) => {
+    return data;
+  });
+};
