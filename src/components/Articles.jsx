@@ -14,20 +14,23 @@ const Articles = ({
   const [currentTopic, setCurrentTopic] = useState(searchParams.get("topic"));
   const [currentTopicDescription, setCurrentTopicDescription] = useState("");
   const [topics, setTopics] = useState([]);
-
-  const getRequestURL = currentTopic
-    ? `/api/articles?topic=${currentTopic}`
-    : "/api/articles";
-  console.log(currentTopic);
+  const [sortBy, setSortBy] = useState("");
 
   useEffect(() => {
+    let getRequestURL = "/api/articles?";
+    getRequestURL += currentTopic ? `topic=${currentTopic}` : "";
+
+    getRequestURL += (currentTopic && sortBy) ? "&" : "";
+
+    getRequestURL += sortBy ? sortBy : "";
+
     getRequest(getRequestURL)
       .then(({ articles }) => {
         setlistArticles(articles);
         setIsLoading(false);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [sortBy]);
 
   useEffect(() => {
     getRequest("/api/topics").then(({ topics }) => {
@@ -39,6 +42,7 @@ const Articles = ({
       setCurrentTopicDescription(currentTopicApi[0].description);
     });
   }, [currentTopic]);
+
   return (
     <div>
       <h2 className="ml-10 mt-10 font-mono text-[30px]">
@@ -54,7 +58,11 @@ const Articles = ({
         <h3 className="ml-10 mb-10 font-mono">{currentTopicDescription}</h3>
       ) : null}
       <div className="flex">
-        <ArticlesSideBar topics={topics} currentTopic ={currentTopic}/>
+        <ArticlesSideBar
+          topics={topics}
+          currentTopic={currentTopic}
+          setSortBy={setSortBy}
+        />
         <div className=" grid-flow-col  space-y-8 ml-20">
           {isLoading ? <Loading /> : null}
           {listArticles.map((article) => {
