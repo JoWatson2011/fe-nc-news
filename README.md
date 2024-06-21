@@ -39,7 +39,8 @@ Note: this has been built and tested with node v21.6.1
 Prior to building the app, I planned it out using a wireframe and a component
 tree. I considered which api endpoints would need to be accessed from each
 component and how to responsibly set state and pass down data on props.
-![Component Tree]("https://github.com/JoWatson2011/fe-nc-news/tree/main/assets/plan-component-tree.png")
+![ReactState](https://github.com/JoWatson2011/fe-nc-news/blob/main/assets/plan-state.png?raw=true)
+![ComponentTree](https://github.com/JoWatson2011/fe-nc-news/blob/main/assets/plan-component-tree.png?raw=true)
 
 
 ---
