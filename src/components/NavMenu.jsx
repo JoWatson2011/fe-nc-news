@@ -22,6 +22,7 @@ const NavMenu = () => {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         color="error"
+        name="menu-button"
       >
         <MenuIcon />
       </IconButton>
