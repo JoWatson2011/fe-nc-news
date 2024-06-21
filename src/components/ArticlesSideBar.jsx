@@ -14,6 +14,7 @@ export default function ArticleSidebar({
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(window.innerWidth)
     const handleWindowResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener("resize", handleWindowResize);
     if (windowWidth < 430) {
@@ -46,7 +47,7 @@ export default function ArticleSidebar({
   };
 
   return (
-    <div className=" ml-10">
+    <div className="menubox">
       {expanded ? (
         <button
           type="button"
@@ -75,9 +76,7 @@ export default function ArticleSidebar({
         </button>
       )}
       {expanded ? (
-        <div //className=" pt-10 border border-box rounded border-green-500 !important"
-          className="menubox"
-        >
+        <div>
           <section className=" ">
             <label className="mb-4 font-bold mt-4" htmlFor="sort-by">
               Sort By
