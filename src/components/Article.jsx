@@ -1,9 +1,12 @@
 import { useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate ,Link } from "react-router-dom";
 import { getRequest } from "../utils/api";
 import LikeButton from "./LikeButton";
 import Comments from "./Comments";
+import NavButton from "./NavButton";
+import { Nav } from "react-bootstrap";
 const Article = ({ article, setArticle }) => {
+  const navigate = useNavigate();
   const { article_id } = useParams();
 
   useEffect(() => {
@@ -18,7 +21,7 @@ const Article = ({ article, setArticle }) => {
   return (
     <div className="ml-10 mr-10 max-w-700">
       <h2 className="font-mono text-[40px]">{article.title}</h2>
-      <LikeButton postWithVotes={article} setFunction = {setArticle}/>
+      <LikeButton postWithVotes={article} setFunction={setArticle} />
       <p className=" text-red-900">
         Posted on {article.created_at} by {article.author}
       </p>
@@ -27,10 +30,15 @@ const Article = ({ article, setArticle }) => {
       <p>{article.body}</p>
       <br />
       <hr className="border-black" />
-      <Link to={`/articles?topic=${article.topic}`} className="italic">
-        More articles about
-        <span className=" text-red-900 t"> {article.topic}</span>
-      </Link>
+      {/* <Link to={`/articles?topic=${article.topic}`} className="italic"> */}
+      <NavButton
+        buttonText={`More articles about ${article.topic}`}
+        handleClick={() => {
+          navigate(`/articles?topic=${article.topic}`);
+        }}
+      />
+
+      {/* </Link> */}
       <br />
       <br />
       <Comments article_id={article_id} />

@@ -1,4 +1,6 @@
 const NavButton = ({ buttonText, handleClick }) => {
+  // const navigate = useNavigate();
+
   return (
     <button
       data-cy="button"
