@@ -53,8 +53,12 @@ export default function ArticleSidebar({
           onClick={() => {
             setExpanded(true);
           }}
+          name="open-articles-sidebar"
+          // className="grid grid-cols-2 gap-1"
         >
-          <KeyboardArrowRightIcon />
+          <span className="flex gap-1 text-xs italic">
+            Menu <KeyboardArrowRightIcon />
+          </span>
         </button>
       )}
       {expanded ? (
@@ -64,8 +68,11 @@ export default function ArticleSidebar({
             onClick={() => {
               setExpanded(false);
             }}
+            name="close-articles-sidebar"
           >
-            <KeyboardArrowLeftIcon />
+            <span className="flex gap-1 text-xs italic">
+              <KeyboardArrowLeftIcon />
+            </span>
           </button>
           <section className=" ">
             <label className="mb-4 font-bold mt-4" htmlFor="sort-by">
