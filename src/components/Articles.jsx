@@ -18,7 +18,6 @@ const Articles = ({
   const [sortBy, setSortBy] = useState(searchParams.get("sort_by"));
   const [order, setOrder] = useState(searchParams.get("order"));
   const [error, setError] = useState(null);
-  console.log(sortBy);
   useEffect(() => {
     let getRequestURL = "/api/articles?";
     getRequestURL += currentTopic ? `topic=${currentTopic}` : "";
@@ -34,7 +33,7 @@ const Articles = ({
         setIsLoading(false);
       })
       .catch((err) => setError(err));
-  }, [sortBy]);
+  }, [sortBy, order]);
 
   useEffect(() => {
     getRequest("/api/topics").then(({ topics }) => {
