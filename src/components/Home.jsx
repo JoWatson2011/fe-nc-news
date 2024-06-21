@@ -36,9 +36,9 @@ const Home = ({
 
   return (
     <div className="ml-10">
-      <p className="font-mono text-[30px]">{`${date.getDate()} ${
+      <h2 className="font-mono text-[30px]">{`${date.getDate()} ${
         months[date.getMonth()]
-      } ${date.getFullYear()}`}</p>
+      } ${date.getFullYear()}`}</h2>
       <p className="font-mono mb-5">Today's top articles</p>
       <div className="grid-flow-col  space-y-8 ml-20">
         {isLoading ? <Loading /> : null}
