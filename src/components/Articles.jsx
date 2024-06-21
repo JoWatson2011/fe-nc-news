@@ -72,7 +72,7 @@ const Articles = ({
         {error ? (
           <ErrorComponent error={error} />
         ) : (
-          <div className=" grid-flow-col  space-y-8 ml-20">
+          <div className="article-list">
             {isLoading ? <Loading /> : null}
             {listArticles.map((article) => {
               return (
