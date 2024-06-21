@@ -88,64 +88,22 @@ export default function ArticleSidebar({
           </section>
 
           <section className=" ">
-            <h4 className="mb-4 font-bold mt-4">Sort By</h4>
+            <label className="mb-4 font-bold mt-4" htmlFor="sort-by">
+              Sort By
+            </label>
             <hr></hr>
-            <div className="grid grid-cols-2 grid-rows-6">
-              <input
-                type="radio"
-                name="sort-by"
-                id="newest"
-                key="newest"
-                value={"newest"}
-                onChange={handleSortChange}
-              />
-              <label htmlFor="newest">Newest</label>
-              <input
-                type="radio"
-                name="sort-by"
-                id="oldest"
-                key="oldest"
-                value={"oldest"}
-                onChange={handleSortChange}
-              />
-              <label htmlFor="oldest">Oldest</label>
-              <input
-                type="radio"
-                name="sort-by"
-                id="most-comments"
-                key="most-comments"
-                value={"mostComments"}
-                onChange={handleSortChange}
-              />
-              <label htmlFor="most-comments">Most comments</label>
-              <input
-                type="radio"
-                name="sort-by"
-                id="least-comments"
-                key="least-comments"
-                value={"leastComments"}
-                onChange={handleSortChange}
-              />
-              <label htmlFor="least-comments">Least comments</label>
-              <input
-                type="radio"
-                name="sort-by"
-                id="most-votes"
-                key="most-votes"
-                value={"mostVotes"}
-                onChange={handleSortChange}
-              />
-              <label htmlFor="most-votes">Most votes</label>
-              <input
-                type="radio"
-                name="sort-by"
-                id="least-votes"
-                key="least-votes"
-                value={"leastVotes"}
-                onChange={handleSortChange}
-              />
-              <label htmlFor="least-votes">Least votes</label>
-            </div>
+            <select
+              id="sort-by"
+              onChange={handleSortChange}
+              className=" pl-14 pr-14 rounded-full"
+            >
+              <option value={"newest"}>Newest</option>
+              <option value={"oldest"}>Oldest</option>
+              <option value={"mostComments"}>Most Comments</option>
+              <option value={"leastComments"}>Least Comments</option>
+              <option value={"mostVotes"}>Most Votes</option>
+              <option value={"leastVotes"}>Most Votes</option>
+            </select>
           </section>
         </div>
       ) : null}

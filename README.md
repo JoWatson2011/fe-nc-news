@@ -1,8 +1,8 @@
 # nc news
 
-[__nc news__](https://jowatson-portfolio-nc-news.netlify.app) is a social news aggregation, web content reating and discussion
-website. Users can post articles and interact with posted articles by adding
-comments and upvoting/downvoting.
+[**nc news**](https://jowatson-portfolio-nc-news.netlify.app) is a social news
+aggregation, web content reating and discussion website. Users can post articles
+and interact with posted articles by adding comments and upvoting/downvoting.
 
 It has been built with **react**, styled with **tailwind** and hosted with
 **netlify**:
@@ -10,7 +10,6 @@ It has been built with **react**, styled with **tailwind** and hosted with
 
 Details of the back-end can be found
 [here](https://github.com/JoWatson2011/nc-news)
-
 
 ### Install & run locally
 
@@ -42,6 +41,12 @@ component and how to responsibly set state and pass down data on props.
 ![ReactState](https://github.com/JoWatson2011/fe-nc-news/blob/main/assets/plan-state.png?raw=true)
 ![ComponentTree](https://github.com/JoWatson2011/fe-nc-news/blob/main/assets/plan-component-tree.png?raw=true)
 
+#### Features to Add
+
+- Pagination of articles and comments
+- Post an article
+- Change which user you are logged in as
+- View details of logged in user's account
 
 ---
 
