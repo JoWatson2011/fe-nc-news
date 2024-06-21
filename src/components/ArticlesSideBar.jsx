@@ -67,7 +67,24 @@ export default function ArticleSidebar({
           >
             <KeyboardArrowLeftIcon />
           </button>
-
+          <section className=" ">
+            <label className="mb-4 font-bold mt-4" htmlFor="sort-by">
+              Sort By
+            </label>
+            <hr></hr>
+            <select
+              id="sort-by"
+              onChange={handleSortChange}
+              className=" pl-14 pr-14 rounded-full border border-gray-700"
+            >
+              <option value={"newest"}>Newest</option>
+              <option value={"oldest"}>Oldest</option>
+              <option value={"mostComments"}>Most Comments</option>
+              <option value={"leastComments"}>Least Comments</option>
+              <option value={"mostVotes"}>Most Votes</option>
+              <option value={"leastVotes"}>Most Votes</option>
+            </select>
+          </section>
           <section className=" p-8">
             <h4 className="mb-4 font-bold mt-4">Topics</h4>
             <hr></hr>
@@ -85,25 +102,6 @@ export default function ArticleSidebar({
                 );
               })}
             </ul>
-          </section>
-
-          <section className=" ">
-            <label className="mb-4 font-bold mt-4" htmlFor="sort-by">
-              Sort By
-            </label>
-            <hr></hr>
-            <select
-              id="sort-by"
-              onChange={handleSortChange}
-              className=" pl-14 pr-14 rounded-full"
-            >
-              <option value={"newest"}>Newest</option>
-              <option value={"oldest"}>Oldest</option>
-              <option value={"mostComments"}>Most Comments</option>
-              <option value={"leastComments"}>Least Comments</option>
-              <option value={"mostVotes"}>Most Votes</option>
-              <option value={"leastVotes"}>Most Votes</option>
-            </select>
           </section>
         </div>
       ) : null}
