@@ -5,37 +5,35 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LikeButton from "./LikeButton";
 
 const ArticleCard = ({ article, setArticle }) => {
+  const navigate = useNavigate();
+
   return (
-    <Card sx={{ maxWidth: 345 }} className=" hover:shadow-xl">
-      <CardMedia
-        sx={{ height: 140 }}
-        image={article.article_img_url}
-        title={article.title}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {article.title}
-        </Typography>
-        <Typography
-          gutterBottom
-          variant="p"
-          component="div"
-          className=" text-red-900 text-right"
-        >
-          {article.topic[0].toUpperCase() + article.topic.slice(1)}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <LikeButton postWithVotes={article} setFunction={setArticle} />
-        <Link to={`/articles/${article.article_id}`}>
-          <Button size="small">Read More</Button>
-        </Link>
-      </CardActions>
-    </Card>
+    <div>
+      <div className="flex flex-row w-full mt-5 mb-5">
+        <div className="mr-10">
+          <img src={article.article_img_url} className="article-image" />
+          <LikeButton postWithVotes={article} setFunction={setArticle} />
+        </div>
+        <div>
+          <h3 className="font-mono font-semibold">{article.title}</h3>
+          <p
+            onClick={() => {
+              navigate(`/articles/${article.article_id}`);
+            }}
+            className="font-mono text-red-900"
+          >
+            {article.topic}
+          </p>
+          <p className="font-mono">{article.created_at.slice(0, 10)}</p>
+          <p className="font-mono">{article.comment_count} comments</p>
+        </div>
+      </div>
+      <hr></hr>
+    </div>
   );
 };
 export default ArticleCard;
