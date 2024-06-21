@@ -46,34 +46,38 @@ export default function ArticleSidebar({
   };
 
   return (
-    <div className="ml-10">
-      {expanded ? null : (
+    <div className=" ml-10">
+      {expanded ? (
+        <button
+          type="button"
+          onClick={() => {
+            setExpanded(false);
+          }}
+          name="close-articles-sidebar"
+          // className="border pt-10 "
+        >
+          <span className="flex gap-1 font-mono italic">
+            Collapse <KeyboardArrowLeftIcon />
+          </span>
+        </button>
+      ) : (
         <button
           type="button"
           onClick={() => {
             setExpanded(true);
           }}
           name="open-articles-sidebar"
-          // className="grid grid-cols-2 gap-1"
+          className="grid grid-cols-2 gap-1 "
         >
-          <span className="flex gap-1 text-xs italic">
+          <span className="flex gap-1 font-mono italic">
             Menu <KeyboardArrowRightIcon />
           </span>
         </button>
       )}
       {expanded ? (
-        <div className="border border-box rounded">
-          <button
-            type="button"
-            onClick={() => {
-              setExpanded(false);
-            }}
-            name="close-articles-sidebar"
-          >
-            <span className="flex gap-1 text-xs italic">
-              <KeyboardArrowLeftIcon />
-            </span>
-          </button>
+        <div //className=" pt-10 border border-box rounded border-green-500 !important"
+          className="menubox"
+        >
           <section className=" ">
             <label className="mb-4 font-bold mt-4" htmlFor="sort-by">
               Sort By
