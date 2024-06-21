@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import NavMenu from "./NavMenu";
 
@@ -14,12 +13,6 @@ const Header = () => {
       ]"
       >
         <hr className=" border-red-700 border-2 col-span-4 mr-10"></hr>
-        {/* <button
-          className="grid col-span-1 text-red-700"
-          onClick={toggleMenu(!menuOpen)}
-        >
-          Menu
-        </button> */}
         <NavMenu />
       </div>
     </div>
