@@ -1,6 +1,9 @@
 import { patchRequest } from "../utils/api";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 const LikeButton = ({ postWithVotes, setFunction }) => {
+  const { user } = useContext(UserContext);
+
   const [votesErr, setVotesErr] = useState(false);
   let displayText = postWithVotes.votes;
 
@@ -44,9 +47,13 @@ const LikeButton = ({ postWithVotes, setFunction }) => {
     <div>
       <div className="flex gap-x-2 place-items-center">
         <button
-          className="w-8 h-8 font-bold text-white bg-orange-800 rounded-full  hover:bg-red-500 active:bg-red-300"
+          className={`w-8 h-8 font-bold  rounded-full ${
+            user != postWithVotes.author
+              ? "  bg-orange-800 hover:bg-red-500 active:bg-red-300 text-white"
+              : " bg-white text-white"
+          }`}
           onClick={() => {
-            patchVote(postId, -1);
+            if (user != postWithVotes.author) patchVote(postId, -1);
           }}
         >
           -1
@@ -55,9 +62,13 @@ const LikeButton = ({ postWithVotes, setFunction }) => {
           {displayText}
         </p>
         <button
-          className="w-8 h-8 font-bold text-white bg-green-950 rounded-full  hover:bg-green-700 active:bg-green-300"
+          className={`w-8 h-8 font-bold  rounded-full ${
+            user != postWithVotes.author
+              ? " bg-green-950 hover:bg-green-700 active:bg-green-300 text-white"
+              : " bg-white text-white"
+          }`}
           onClick={() => {
-            patchVote(postId, 1);
+            if (user != postWithVotes.author) patchVote(postId, 1);
           }}
         >
           +1
