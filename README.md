@@ -1,7 +1,7 @@
 # nc news
 
-[__nc news__](https://jowatson-portfolio-nc-news.netlify.app) is a social news aggregation, web content reating and discussion
-website. Users can post articles and interact with posted articles by adding
+[__nc news__](https://jowatson-portfolio-nc-news.netlify.app) is a social news aggregation website, where  web content can be rated and discussed
+. Users can post articles and interact with posted articles by adding
 comments and upvoting/downvoting.
 
 It has been built with **react**, styled with **tailwind** and hosted with
