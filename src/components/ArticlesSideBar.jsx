@@ -14,10 +14,9 @@ export default function ArticleSidebar({ topics, currentTopic }) {
       setWindowWidth(window.innerWidth);
 
       setWindowWidth((prevWidth) => {
-        console.log("prevWidth:", prevWidth);
         if (window.innerWidth < 430) {
           setExpanded(false);
-          setMenuStyle("fixed z-1 bg-red-600/90 min-w-[160px] h-full  p-6");
+          setMenuStyle("fixed z-1 bg-red-600/90 min-w-[160px] h-full  p-3");
         } else {
           setExpanded(true);
           setMenuStyle("min-w-[165px] p-3 ml-2");
@@ -58,7 +57,9 @@ export default function ArticleSidebar({ topics, currentTopic }) {
           </section>
         </div>
       ) : (
-        <MenuIcon onClick={() => setExpanded(true)} />
+        <div className="p-3 fixed z-1 ">
+          <MenuIcon onClick={() => setExpanded(true)} />
+        </div>
       )}
     </div>
   );
