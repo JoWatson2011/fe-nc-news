@@ -13,7 +13,7 @@ const ArticleCard = ({ article, setArticle }) => {
               navigate(`/articles/${article.article_id}`);
             }}
             src={article.article_img_url}
-            className="article-image"
+            className="w-[120px] h-[80px] rounded-[20px]"
           />
           <LikeButton postWithVotes={article} setFunction={setArticle} />
         </div>
