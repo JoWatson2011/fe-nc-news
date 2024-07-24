@@ -31,7 +31,7 @@ export default function ArticlesListOptions({ setSortBy, setOrder }) {
       <select
         id="sort-by"
         onChange={handleSortChange}
-        className=" pl-14 pr-14 rounded-full border border-gray-700"
+        className=" rounded-full border border-gray-700 max-w-[180px] text-center px-1"
       >
         <option value={"newest"}>Newest</option>
         <option value={"oldest"}>Oldest</option>
