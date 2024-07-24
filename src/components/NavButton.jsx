@@ -1,4 +1,4 @@
-const NavButton = ({ buttonText, handleClick }) => {
+const NavButton = ({ buttonText, handleClick, icon }) => {
   return (
     <div>
       <button
@@ -7,6 +7,7 @@ const NavButton = ({ buttonText, handleClick }) => {
         onClick={handleClick}
         className=" p-2 bg-red-50 rounded-full text-nowrap"
       >
+        {icon ? icon : null}
         {buttonText}
       </button>
     </div>
