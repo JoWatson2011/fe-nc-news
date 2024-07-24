@@ -5,7 +5,7 @@ const NavButton = ({ buttonText, handleClick }) => {
         data-cy="button"
         type="button"
         onClick={handleClick}
-        className=" p-2 bg-red-50 rounded-full mb-10 ml-20"
+        className=" p-2 bg-red-50 rounded-full"
       >
         {buttonText}
       </button>

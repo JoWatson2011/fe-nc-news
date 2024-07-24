@@ -9,9 +9,11 @@ const Header = () => {
         <Link to="/">
           <h1 className=" text-[65px] font-mono text-red-600">nc news</h1>
         </Link>
+      </div>
+      <div className="grid grid-cols-5 items-center">
+        <hr className=" border-grey-400 border col-span-4 mr-3"></hr>
         <NavMenu />
       </div>
-      <hr className=" border-grey-400 border col-span-4"></hr>
     </div>
   );
 };

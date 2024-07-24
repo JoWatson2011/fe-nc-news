@@ -2,6 +2,8 @@ import Articles from "./Articles";
 import Article from "./Article";
 import Home from "./Home";
 import PostArticle from "./PostArticle";
+import LogIn from "./LogIn";
+import MyAccount from "./MyAccount";
 import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
 import ErrorPage from "./ErrorPage";
@@ -39,6 +41,8 @@ const ArticlesContainer = () => {
         element={<Article article={article} setArticle={setArticle} />}
       />
       <Route path="/articles/post" element={<PostArticle />} />
+      <Route path="/login" element={<LogIn />} />
+      <Route path="/account" element={<MyAccount />} />
       <Route path="/*" element={<ErrorPage />} />
     </Routes>
   );
