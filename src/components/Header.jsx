@@ -3,20 +3,15 @@ import NavMenu from "./NavMenu";
 
 const Header = () => {
   return (
-    <div className=" mb-10 ">
+    <div>
       <div className="flex items-center">
-        <img src="../../assets/logo.png" className="logo" />
+        <img src="../../assets/logo.png" className="h-[65px] ml-5 mr-3" />
         <Link to="/">
-          <h1 className="header">nc news</h1>
+          <h1 className=" text-[65px] font-mono text-red-600">nc news</h1>
         </Link>
-      </div>
-      <div
-        className="grid grid-cols-5 items-center
-      ]"
-      >
-        <hr className=" border-red-700 border-2 col-span-4 mr-10"></hr>
         <NavMenu />
       </div>
+      <hr className=" border-grey-400 border col-span-4"></hr>
     </div>
   );
 };
