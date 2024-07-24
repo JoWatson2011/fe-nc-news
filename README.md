@@ -1,8 +1,9 @@
 # nc news
 
-[__nc news__](https://jowatson-portfolio-nc-news.netlify.app) is a social news aggregation website, where  web content can be rated and discussed
-. Users can post articles and interact with posted articles by adding
-comments and upvoting/downvoting.
+[**nc news**](https://jowatson-portfolio-nc-news.netlify.app) is a social news
+aggregation, web content reating and discussion website. Users can post articles
+and interact with posted articles by adding comments and upvoting/downvoting.
+
 
 It has been built with **react**, styled with **tailwind** and hosted with
 **netlify**:
@@ -10,7 +11,6 @@ It has been built with **react**, styled with **tailwind** and hosted with
 
 Details of the back-end can be found
 [here](https://github.com/JoWatson2011/nc-news)
-
 
 ### Install & run locally
 
@@ -39,8 +39,15 @@ Note: this has been built and tested with node v21.6.1
 Prior to building the app, I planned it out using a wireframe and a component
 tree. I considered which api endpoints would need to be accessed from each
 component and how to responsibly set state and pass down data on props.
-![Component Tree]("https://github.com/JoWatson2011/fe-nc-news/tree/main/assets/plan-component-tree.png")
+![ReactState](https://github.com/JoWatson2011/fe-nc-news/blob/main/assets/plan-state.png?raw=true)
+![ComponentTree](https://github.com/JoWatson2011/fe-nc-news/blob/main/assets/plan-component-tree.png?raw=true)
 
+#### Features to Add
+
+- Pagination of articles and comments
+- Post an article
+- Change which user you are logged in as
+- View details of logged in user's account
 
 ---
 

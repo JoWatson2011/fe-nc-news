@@ -36,11 +36,11 @@ const Home = ({
 
   return (
     <div className="ml-10">
-      <p className="font-mono text-[30px]">{`${date.getDate()} ${
+      <h2 className="font-mono text-[30px]">{`${date.getDate()} ${
         months[date.getMonth()]
-      } ${date.getFullYear()}`}</p>
+      } ${date.getFullYear()}`}</h2>
       <p className="font-mono mb-5">Today's top articles</p>
-      <div className="grid-flow-col  space-y-8 ml-20">
+      <div className="grid-flow-col  space-y-8">
         {isLoading ? <Loading /> : null}
         {listArticles.map((article) => {
           return (
@@ -52,13 +52,13 @@ const Home = ({
           );
         })}
         {!isLoading ? (
-          <Link to="/articles">
-            <NavButton buttonText={"More Articles"} />
-          </Link>
+          <div className="m-auto">
+            <Link to="/articles">
+              <NavButton buttonText={"More Articles"} />
+            </Link>
+          </div>
         ) : null}
       </div>
-      {/* <Link to="/articles"> */}
-      {/* </Link> */}
     </div>
   );
 };

@@ -5,6 +5,7 @@ import ArticleCard from "./ArticleCard";
 import Loading from "./Loading";
 import ArticlesSideBar from "./ArticlesSideBar";
 import ErrorComponent from "./ErrorComponent";
+import ArticlesListOptions from "./ArticlesListOptions";
 const Articles = ({
   listArticles,
   setlistArticles,
@@ -18,7 +19,6 @@ const Articles = ({
   const [sortBy, setSortBy] = useState(searchParams.get("sort_by"));
   const [order, setOrder] = useState(searchParams.get("order"));
   const [error, setError] = useState(null);
-  console.log(sortBy);
   useEffect(() => {
     let getRequestURL = "/api/articles?";
     getRequestURL += currentTopic ? `topic=${currentTopic}` : "";
@@ -34,7 +34,7 @@ const Articles = ({
         setIsLoading(false);
       })
       .catch((err) => setError(err));
-  }, [sortBy]);
+  }, [sortBy, order]);
 
   useEffect(() => {
     getRequest("/api/topics").then(({ topics }) => {
@@ -48,32 +48,41 @@ const Articles = ({
   }, [currentTopic]);
 
   return (
-    <div>
-      <h2 className="ml-10 mt-10 font-mono text-[30px]">
-        <Link to="/articles" reloadDocument="true">
-          Articles
-        </Link>
-        {error ? null : (
-          <span className=" text-red-700">
-            {" "}
-            {currentTopic ? `/ ${currentTopic}` : ""}{" "}
-          </span>
-        )}
-      </h2>
-      {currentTopic ? (
-        <h3 className="ml-10 mb-10 font-mono">{currentTopicDescription}</h3>
-      ) : null}
-      <div className="flex">
-        <ArticlesSideBar
-          topics={topics}
-          currentTopic={currentTopic}
-          setSortBy={setSortBy}
-          setOrder={setOrder}
-        />
+    <div className="flex">
+      <ArticlesSideBar topics={topics} currentTopic={currentTopic} />
+      <div>
+        <div className="m-10">
+          <div>
+            <h2 className=" font-mono text-[30px] ml-6">
+              <Link to="/articles" reloadDocument="true">
+                Articles
+              </Link>
+              {error ? null : (
+                <span className=" text-red-700">
+                  {" "}
+                  {currentTopic ? `/ ${currentTopic}` : ""}{" "}
+                </span>
+              )}
+            </h2>
+            {currentTopic ? (
+              <h3 className="ml-10 mb-10 font-mono">
+                {currentTopicDescription}
+              </h3>
+            ) : null}
+          </div>
+        </div>
+
         {error ? (
           <ErrorComponent error={error} />
         ) : (
-          <div className=" grid-flow-col  space-y-8 ml-20">
+          <div className="flex flex-col ml-3">
+            <div className="ml-10">
+              <ArticlesListOptions
+                setSortBy={setSortBy}
+                setOrder={setOrder}
+                currentTopic={currentTopic}
+              />
+            </div>
             {isLoading ? <Loading /> : null}
             {listArticles.map((article) => {
               return (

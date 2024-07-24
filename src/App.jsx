@@ -7,7 +7,7 @@ function App() {
     <BrowserRouter>
       <ScrollToTop />
       <Header />
-      <ArticlesContainer className="ml-20" />
+      <ArticlesContainer />
     </BrowserRouter>
   );
 }
