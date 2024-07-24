@@ -43,13 +43,15 @@ export default function ArticleSidebar({ topics, currentTopic }) {
             <ul>
               {topics.map((topic) => {
                 const topicSelectedClass =
-                  currentTopic === topic.slug ? "font-bold text-red-700" : "";
+                  currentTopic === topic.slug ? "font-bold" : "";
                 return (
                   <Link
                     to={`/articles?topic=${topic.slug}`}
                     reloadDocument="true"
                   >
-                    <li className={topicSelectedClass}>{topic.slug}</li>
+                    <li className={topicSelectedClass} key={topic.slug}>
+                      {topic.slug}
+                    </li>
                   </Link>
                 );
               })}
