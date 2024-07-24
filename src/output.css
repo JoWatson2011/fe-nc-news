@@ -574,31 +574,8 @@ video {
   margin: 0.5rem;
 }
 
-.m-60 {
-  margin: 15rem;
-}
-
-.m-6 {
-  margin: 1.5rem;
-}
-
 .m-auto {
   margin: auto;
-}
-
-.mx-3 {
-  margin-left: 0.75rem;
-  margin-right: 0.75rem;
-}
-
-.-mx-5 {
-  margin-left: -1.25rem;
-  margin-right: -1.25rem;
-}
-
-.mx-5 {
-  margin-left: 1.25rem;
-  margin-right: 1.25rem;
 }
 
 .mb-10 {
@@ -617,8 +594,20 @@ video {
   margin-left: 2.5rem;
 }
 
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
 .ml-20 {
   margin-left: 5rem;
+}
+
+.ml-3 {
+  margin-left: 0.75rem;
+}
+
+.ml-5 {
+  margin-left: 1.25rem;
 }
 
 .ml-6 {
@@ -629,6 +618,10 @@ video {
   margin-right: 2.5rem;
 }
 
+.mr-3 {
+  margin-right: 0.75rem;
+}
+
 .mt-4 {
   margin-top: 1rem;
 }
@@ -637,24 +630,8 @@ video {
   margin-top: 1.25rem;
 }
 
-.ml-5 {
-  margin-left: 1.25rem;
-}
-
-.mr-3 {
-  margin-right: 0.75rem;
-}
-
-.ml-3 {
-  margin-left: 0.75rem;
-}
-
-.ml-2 {
-  margin-left: 0.5rem;
-}
-
-.mb-6 {
-  margin-bottom: 1.5rem;
+.ml-1 {
+  margin-left: 0.25rem;
 }
 
 .flex {
@@ -673,20 +650,20 @@ video {
   height: 2rem;
 }
 
-.h-screen {
-  height: 100vh;
+.h-\[65px\] {
+  height: 65px;
 }
 
 .h-\[80px\] {
   height: 80px;
 }
 
-.h-\[65px\] {
-  height: 65px;
-}
-
 .h-full {
   height: 100%;
+}
+
+.h-screen {
+  height: 100vh;
 }
 
 .w-10 {
@@ -697,40 +674,20 @@ video {
   width: 2rem;
 }
 
-.w-full {
-  width: 100%;
-}
-
 .w-\[120px\] {
   width: 120px;
 }
 
-.min-w-\[165px\] {
-  min-width: 165px;
-}
-
-.min-w-\[100px\] {
-  min-width: 100px;
+.w-full {
+  width: 100%;
 }
 
 .min-w-\[160px\] {
   min-width: 160px;
 }
 
-.max-w-\[30px\] {
-  max-width: 30px;
-}
-
-.max-w-\[50px\] {
-  max-width: 50px;
-}
-
-.max-w-\[150px\] {
-  max-width: 150px;
-}
-
-.max-w-\[170px\] {
-  max-width: 170px;
+.min-w-\[165px\] {
+  min-width: 165px;
 }
 
 .max-w-\[180px\] {
@@ -796,12 +753,12 @@ video {
   border-radius: 0.25rem;
 }
 
-.rounded-full {
-  border-radius: 9999px;
-}
-
 .rounded-\[20px\] {
   border-radius: 20px;
+}
+
+.rounded-full {
+  border-radius: 9999px;
 }
 
 .border {
@@ -815,11 +772,6 @@ video {
 .border-black {
   --tw-border-opacity: 1;
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
-}
-
-.border-gray-400 {
-  --tw-border-opacity: 1;
-  border-color: rgb(156 163 175 / var(--tw-border-opacity));
 }
 
 .border-gray-700 {
@@ -847,26 +799,13 @@ video {
   background-color: rgb(254 242 242 / var(--tw-bg-opacity));
 }
 
+.bg-red-600\/90 {
+  background-color: rgb(220 38 38 / 0.9);
+}
+
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.bg-red-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(220 38 38 / var(--tw-bg-opacity));
-}
-
-.bg-red-600\/50 {
-  background-color: rgb(220 38 38 / 0.5);
-}
-
-.bg-red-600\/70 {
-  background-color: rgb(220 38 38 / 0.7);
-}
-
-.bg-red-600\/90 {
-  background-color: rgb(220 38 38 / 0.9);
 }
 
 .p-1 {
@@ -877,24 +816,12 @@ video {
   padding: 0.5rem;
 }
 
-.p-8 {
-  padding: 2rem;
-}
-
 .p-3 {
   padding: 0.75rem;
 }
 
-.p-6 {
-  padding: 1.5rem;
-}
-
-.p-5 {
-  padding: 1.25rem;
-}
-
-.p-4 {
-  padding: 1rem;
+.p-8 {
+  padding: 2rem;
 }
 
 .px-1 {
@@ -902,20 +829,12 @@ video {
   padding-right: 0.25rem;
 }
 
-.pl-14 {
-  padding-left: 3.5rem;
-}
-
-.pr-14 {
-  padding-right: 3.5rem;
-}
-
 .pr-4 {
   padding-right: 1rem;
 }
 
-.pl-6 {
-  padding-left: 1.5rem;
+.pl-1 {
+  padding-left: 0.25rem;
 }
 
 .text-center {
@@ -954,6 +873,11 @@ video {
   line-height: 1.75rem;
 }
 
+.text-red-600 {
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity));
+}
+
 .text-red-700 {
   --tw-text-opacity: 1;
   color: rgb(185 28 28 / var(--tw-text-opacity));
@@ -972,25 +896,6 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-red-500 {
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
-}
-
-.text-red-600 {
-  --tw-text-opacity: 1;
-  color: rgb(220 38 38 / var(--tw-text-opacity));
-}
-
-.text-blue-700 {
-  --tw-text-opacity: 1;
-  color: rgb(29 78 216 / var(--tw-text-opacity));
-}
-
-.opacity-50 {
-  opacity: 0.5;
 }
 
 .filter {
