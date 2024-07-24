@@ -8,9 +8,14 @@ const NavMenu = () => {
   return (
     <div>
       {user ? (
-        <Link to="/account">
-          <NavButton buttonText={"My Account"} />
-        </Link>
+        <div className="flex">
+          <Link to="/articles/post">
+            <NavButton buttonText={"Post Article"} />
+          </Link>
+          <Link to="/account">
+            <NavButton buttonText={"My Account"} />
+          </Link>
+        </div>
       ) : (
         <Link to="login">
           <NavButton buttonText={"Log In"} />
