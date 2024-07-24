@@ -5,7 +5,10 @@ const Header = () => {
   return (
     <div>
       <div className="flex items-center">
-        <img src="../../assets/logo.png" className="h-[65px] ml-5 mr-3" />
+        <img
+          src="https://github.com/JoWatson2011/fe-nc-news/blob/main/assets/logo.png?raw=true"
+          className="h-[65px] ml-5 mr-3"
+        />
         <Link to="/">
           <h1 className=" text-[65px] font-mono text-red-600">nc news</h1>
         </Link>
