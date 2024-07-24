@@ -1,103 +1,46 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 
-export default function ArticleSidebar({
-  setSortBy,
-  setOrder,
-  topics,
-  currentTopic,
-}) {
+export default function ArticleSidebar({ topics, currentTopic }) {
   const [expanded, setExpanded] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [menuStyle, setMenuStyle] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(window.innerWidth)
-    const handleWindowResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener("resize", handleWindowResize);
-    if (windowWidth < 430) {
-      // Width of Samsung Galazy S20 Ultra
-      setExpanded(false);
-    } else {
-      setExpanded(true);
-    }
-    return () => window.removeEventListener("resize", handleWindowResize);
-  }, [window.innerWidth]);
+    const handleWindowResize = () => {
+      setWindowWidth(window.innerWidth);
 
-  const handleSortChange = (e) => {
-    const sortOrderValues = {
-      newest: { sort_by: "created_at", order: "desc" },
-      oldest: { sort_by: "created_at", order: "asc" },
-      mostComments: { sort_by: "comment_count", order: "desc" },
-      leastComments: { sort_by: "comment_count", order: "asc" },
-      mostVotes: { sort_by: "votes", order: "desc" },
-      leastVotes: { sort_by: "votes", order: "asc" },
+      setWindowWidth((prevWidth) => {
+        console.log("prevWidth:", prevWidth);
+        if (window.innerWidth < 430) {
+          setExpanded(false);
+          setMenuStyle("fixed z-1 bg-red-600/90 min-w-[160px] h-full  p-6");
+        } else {
+          setExpanded(true);
+          setMenuStyle("min-w-[165px] p-3 ml-2");
+        }
+        return window.innerWidth;
+      });
     };
-    const { sort_by, order } = sortOrderValues[e.target.value];
 
-    setSortBy(sort_by);
-    setOrder(order);
+    handleWindowResize();
+    window.addEventListener("resize", handleWindowResize);
 
-    const navigateURL = currentTopic
-      ? `/articles?topic=${currentTopic}&sort_by=${sort_by}&order=${order}`
-      : `/articles?sort_by=${sort_by}&order=${order}`;
-    navigate(navigateURL);
-  };
+    return () => window.removeEventListener("resize", handleWindowResize);
+  }, []);
 
   return (
-    <div className="menubox">
+    <div>
       {expanded ? (
-        <button
-          type="button"
-          onClick={() => {
-            setExpanded(false);
-          }}
-          name="close-articles-sidebar"
-          // className="border pt-10 "
-        >
-          <span className="flex gap-1 font-mono italic">
-            Collapse <KeyboardArrowLeftIcon />
-          </span>
-        </button>
-      ) : (
-        <button
-          type="button"
-          onClick={() => {
-            setExpanded(true);
-          }}
-          name="open-articles-sidebar"
-          className="grid grid-cols-2 gap-1 "
-        >
-          <span className="flex gap-1 font-mono italic">
-            Menu <KeyboardArrowRightIcon />
-          </span>
-        </button>
-      )}
-      {expanded ? (
-        <div>
-          <section className=" ">
-            <label className="mb-4 font-bold mt-4" htmlFor="sort-by">
-              Sort By
-            </label>
-            <hr></hr>
-            <select
-              id="sort-by"
-              onChange={handleSortChange}
-              className=" pl-14 pr-14 rounded-full border border-gray-700"
-            >
-              <option value={"newest"}>Newest</option>
-              <option value={"oldest"}>Oldest</option>
-              <option value={"mostComments"}>Most Comments</option>
-              <option value={"leastComments"}>Least Comments</option>
-              <option value={"mostVotes"}>Most Votes</option>
-              <option value={"leastVotes"}>Most Votes</option>
-            </select>
-          </section>
-          <section className=" p-8">
+        <div className=" h-full border-r ">
+          <section className={menuStyle}>
+            {windowWidth < 430 ? (
+              <CloseIcon onClick={() => setExpanded(false)} />
+            ) : null}
             <h4 className="mb-4 font-bold mt-4">Topics</h4>
-            <hr></hr>
             <ul>
               {topics.map((topic) => {
                 const topicSelectedClass =
@@ -114,7 +57,9 @@ export default function ArticleSidebar({
             </ul>
           </section>
         </div>
-      ) : null}
+      ) : (
+        <MenuIcon onClick={() => setExpanded(true)} />
+      )}
     </div>
   );
 }
