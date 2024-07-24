@@ -4,6 +4,7 @@
 aggregation, web content reating and discussion website. Users can post articles
 and interact with posted articles by adding comments and upvoting/downvoting.
 
+
 It has been built with **react**, styled with **tailwind** and hosted with
 **netlify**:
 [https://jowatson-portfolio-nc-news.netlify.app](https://jowatson-portfolio-nc-news.netlify.app)
