@@ -40,7 +40,7 @@ const Articles = ({
   }, [sortBy, order]);
 
   useEffect(() => {
-    if (!currentTopic & !awaitingTopics) {
+    if (currentTopic && !awaitingTopics) {
       const currentTopicApi = topics.filter((apiTopic) => {
         return apiTopic.slug === currentTopic;
       });
