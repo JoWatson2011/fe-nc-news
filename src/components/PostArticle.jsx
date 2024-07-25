@@ -19,6 +19,14 @@ const PostArticle = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+  const handleReset = (e) => {
+    e.preventDefault();
+    setSelectedTopic("");
+    setNewTopic("");
+    setArticleTitle("");
+    setArticleBody("");
+    setArticleImg("");
+  };
   return (
     <main>
       <h2 className=" font-mono text-[30px] ml-6">Post an article</h2>
@@ -26,6 +34,7 @@ const PostArticle = () => {
         <Button
           variant="outlined"
           startIcon={<ReplayIcon />}
+          onClick={handleReset}
           className="place-self-end"
         >
           Reset
