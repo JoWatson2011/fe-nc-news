@@ -1,5 +1,4 @@
 import TextField from "@mui/material/TextField";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { useState, useContext } from "react";
@@ -15,6 +14,7 @@ const PostArticle = () => {
   const [newTopic, setNewTopic] = useState("");
   const [articleTitle, setArticleTitle] = useState("");
   const [articleBody, setArticleBody] = useState("");
+  const [articleImg, setArticleImg] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,21 +22,26 @@ const PostArticle = () => {
   return (
     <main>
       <h2 className=" font-mono text-[30px] ml-6">Post an article</h2>
-      <div className="m-auto w-[80%]">
-        <Button variant="outlined" startIcon={<ReplayIcon />}>
+      <div className="m-auto w-[80%] flex flex-col">
+        <Button
+          variant="outlined"
+          startIcon={<ReplayIcon />}
+          className="place-self-end"
+        >
           Reset
         </Button>
         <form onSubmit={handleSubmit}>
           {awaitingTopics ? (
             <Loading />
           ) : (
-            <div>
+            <div className="flex justify-between">
               <Select
                 label="Select Topic"
                 value={selectedTopic}
                 onChange={(e) => setSelectedTopic(e.target.value)}
                 placeholder="Select a topic"
-                className="w-[50%]"
+                margin="normal"
+                className="w-[70%]"
               >
                 {[...topics, { slug: "Create new topic..." }].map((topic) => {
                   return (
@@ -50,6 +55,7 @@ const PostArticle = () => {
                 <TextField
                   label="New topic name"
                   value={newTopic}
+                  margin="normal"
                   onChange={(e) => {
                     setNewTopic(e.target.value);
                   }}
@@ -71,6 +77,13 @@ const PostArticle = () => {
             rows={4}
             value={articleBody}
             onChange={(e) => setArticleBody(e.target.value)}
+            margin="normal"
+            className="w-full"
+          />
+          <TextField
+            label="Article Image (URL)"
+            value={articleImg}
+            onChange={(e) => setArticleImg(e.target.value)}
             margin="normal"
             className="w-full"
           />
