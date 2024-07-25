@@ -1,9 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import { TopicsContext } from "../contexts/TopicsContext";
+import Loading from "./Loading";
 
-export default function ArticleSidebar({ topics, currentTopic }) {
+export default function ArticleSidebar({ currentTopic }) {
+  const { topics, awaitingTopics } = useContext(TopicsContext);
+
   const [expanded, setExpanded] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [menuStyle, setMenuStyle] = useState("");
@@ -40,22 +44,27 @@ export default function ArticleSidebar({ topics, currentTopic }) {
               <CloseIcon onClick={() => setExpanded(false)} />
             ) : null}
             <h4 className="mb-4 font-bold mt-4">Topics</h4>
-            <ul>
-              {topics.map((topic) => {
-                const topicSelectedClass =
-                  currentTopic === topic.slug ? "font-bold" : "";
-                return (
-                  <Link
-                    to={`/articles?topic=${topic.slug}`}
-                    reloadDocument="true"
-                  >
-                    <li className={topicSelectedClass} key={topic.slug}>
-                      {topic.slug}
-                    </li>
-                  </Link>
-                );
-              })}
-            </ul>
+            {awaitingTopics ? (
+              <Loading />
+            ) : (
+              <ul>
+                {topics.map((topic) => {
+                  const topicSelectedClass =
+                    currentTopic === topic.slug ? "font-bold" : "";
+                  return (
+                    <Link
+                      to={`/articles?topic=${topic.slug}`}
+                      reloadDocument="true"
+                      key={topic.slug}
+                    >
+                      <li className={topicSelectedClass} key={topic.slug}>
+                        {topic.slug}
+                      </li>
+                    </Link>
+                  );
+                })}
+              </ul>
+            )}
           </section>
         </div>
       ) : (
