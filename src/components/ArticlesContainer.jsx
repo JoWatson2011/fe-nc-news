@@ -10,6 +10,7 @@ import ErrorPage from "./ErrorPage";
 
 const ArticlesContainer = () => {
   const [listArticles, setlistArticles] = useState([]);
+  const [topics, setTopics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [article, setArticle] = useState({});
   return (
@@ -33,6 +34,8 @@ const ArticlesContainer = () => {
             setlistArticles={setlistArticles}
             isLoading={isLoading}
             setIsLoading={setIsLoading}
+            topics={topics}
+            setTopics={setTopics}
           />
         }
       />

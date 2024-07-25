@@ -11,11 +11,12 @@ const Articles = ({
   setlistArticles,
   isLoading,
   setIsLoading,
+  topics,
+  setTopics,
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentTopic, setCurrentTopic] = useState(searchParams.get("topic"));
   const [currentTopicDescription, setCurrentTopicDescription] = useState("");
-  const [topics, setTopics] = useState([]);
   const [sortBy, setSortBy] = useState(searchParams.get("sort_by"));
   const [order, setOrder] = useState(searchParams.get("order"));
   const [error, setError] = useState(null);
