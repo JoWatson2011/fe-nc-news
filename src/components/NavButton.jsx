@@ -1,6 +1,5 @@
 const NavButton = ({ buttonText, handleClick, icon }) => {
   return (
-    <div>
       <button
         data-cy="button"
         type="button"
@@ -10,7 +9,6 @@ const NavButton = ({ buttonText, handleClick, icon }) => {
         {icon ? icon : null}
         {buttonText}
       </button>
-    </div>
   );
 };
 
