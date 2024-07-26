@@ -2,8 +2,11 @@ import { useEffect, useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import TrendingUpIcon from "@mui/icons-material/TrendingUp";
+import PublicIcon from "@mui/icons-material/Public";
 import { TopicsContext } from "../contexts/TopicsContext";
 import Loading from "./Loading";
+import NavButton from "./NavButton";
 
 export default function ArticleSidebar({ currentTopic }) {
   const { topics, awaitingTopics } = useContext(TopicsContext);
@@ -18,9 +21,11 @@ export default function ArticleSidebar({ currentTopic }) {
       setWindowWidth(window.innerWidth);
 
       setWindowWidth((prevWidth) => {
-        if (window.innerWidth < 430) {
+        if (window.innerWidth <= 431) {
           setExpanded(false);
-          setMenuStyle("fixed z-1 bg-red-600/90 min-w-[160px] h-full  p-3");
+          setMenuStyle(
+            "fixed z-1 -translate-y-5 bg-red-600/90 min-w-[160px] h-full  p-3 rounded-r-[20px]"
+          );
         } else {
           setExpanded(true);
           setMenuStyle("min-w-[165px] p-3 ml-2");
@@ -38,11 +43,23 @@ export default function ArticleSidebar({ currentTopic }) {
   return (
     <div>
       {expanded ? (
-        <div className=" h-full border-r ">
+        <div className=" h-full border-r">
           <section className={menuStyle}>
-            {windowWidth < 430 ? (
+            {windowWidth <= 431 ? (
               <CloseIcon onClick={() => setExpanded(false)} />
             ) : null}
+            <div className="flex flex-col max-w-[120px] space-y-4">
+              <NavButton
+                buttonText={"Trending"}
+                handleClick={() => navigate("/")}
+                icon={<TrendingUpIcon />}
+              />
+              <NavButton
+                buttonText={"All Articles"}
+                handleClick={() => navigate("/articles")}
+                icon={<PublicIcon />}
+              />
+            </div>
             <h4 className="mb-4 font-bold mt-4">Topics</h4>
             {awaitingTopics ? (
               <Loading />
@@ -58,7 +75,8 @@ export default function ArticleSidebar({ currentTopic }) {
                       key={topic.slug}
                     >
                       <li className={topicSelectedClass} key={topic.slug}>
-                        {topic.slug}
+                        {topic.slug.slice(0, 1).toUpperCase() +
+                          topic.slug.slice(1)}
                       </li>
                     </Link>
                   );
@@ -68,8 +86,11 @@ export default function ArticleSidebar({ currentTopic }) {
           </section>
         </div>
       ) : (
-        <div className="p-3 fixed z-1 ">
-          <MenuIcon onClick={() => setExpanded(true)} />
+        <div className="m-3 fixed  -translate-y-11 z-1 ">
+          <MenuIcon
+            onClick={() => setExpanded(true)}
+            className="border border-white rounded-full bg-white"
+          />
         </div>
       )}
     </div>
