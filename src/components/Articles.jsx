@@ -25,6 +25,7 @@ const Articles = ({
   const [order, setOrder] = useState(searchParams.get("order"));
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
+  const [totalArticleCount, setTotalArticleCount] = useState(0);
   useEffect(() => {
     let getRequestURL = "/api/articles?";
     getRequestURL += currentTopic ? `topic=${currentTopic}` : "";
@@ -36,12 +37,13 @@ const Articles = ({
     getRequestURL += `&p=${page}`;
 
     getRequest(getRequestURL)
-      .then(({ articles }) => {
+      .then((body) => {
+        const { articles, total_count } = body;
+        setTotalArticleCount(total_count);
         setlistArticles(articles);
         setIsLoading(false);
       })
-      .catch((err) => setError(err));
-  }, [sortBy, order]);
+  }, [sortBy, order, page]);
 
   useEffect(() => {
     if (currentTopic && !awaitingTopics) {
