@@ -1,18 +1,20 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useReducer } from "react";
 import { getRequest } from "../utils/api";
+import topicsReducer from "../utils/reducers";
 export const TopicsContext = createContext();
+export const TopicsDispatchContext = createContext();
 
 export const TopicsProvider = ({ children }) => {
-  const [topics, setTopics] = useState([]);
   const [awaitingTopics, setAwaitingTopics] = useState(true);
-  const [error, setError] = useState(null);
+  const [topics, dispatch] = useReducer(topicsReducer, []);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { topics } = await getRequest("/api/topics/");
-        setTopics(topics);
+        dispatch({ type: "initialDataFetched", data: topics });
       } catch (err) {
-        setError(err);
+        console.log(err);
       } finally {
         setAwaitingTopics(false);
       }
@@ -22,8 +24,10 @@ export const TopicsProvider = ({ children }) => {
   }, []);
 
   return (
-    <TopicsContext.Provider value={{ topics, setTopics, awaitingTopics }}>
-      {children}
+    <TopicsContext.Provider value={{ topics, awaitingTopics }}>
+      <TopicsDispatchContext.Provider value={dispatch}>
+        {children}
+      </TopicsDispatchContext.Provider>
     </TopicsContext.Provider>
   );
 };
