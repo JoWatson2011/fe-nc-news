@@ -3,6 +3,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { useState, useContext } from "react";
 import { TopicsContext } from "../contexts/TopicsContext";
+import { TopicsDispatchContext } from "../contexts/TopicsContext";
 import Loading from "./Loading";
 import Button from "@mui/material/Button";
 import ReplayIcon from "@mui/icons-material/Replay";
@@ -11,6 +12,7 @@ import { postRequest } from "../utils/api";
 
 const PostArticle = () => {
   const { topics, awaitingTopics } = useContext(TopicsContext);
+  const dispatch  = useContext(TopicsDispatchContext);
   const [selectedTopic, setSelectedTopic] = useState("");
   const [newTopic, setNewTopic] = useState("");
   const [newTopicDescription, setNewTopicDescription] = useState("");
@@ -24,6 +26,8 @@ const PostArticle = () => {
       postRequest("/api/topics/", {
         slug: newTopic,
         description: newTopicDescription,
+      }).then(({ topic }) => {
+        dispatch({ type: "added", data: topic });
       })
     }
   };
