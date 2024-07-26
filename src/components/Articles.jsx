@@ -22,6 +22,7 @@ const Articles = ({
   const [sortBy, setSortBy] = useState(searchParams.get("sort_by"));
   const [order, setOrder] = useState(searchParams.get("order"));
   const [error, setError] = useState(null);
+  const [page, setPage] = useState(1);
   useEffect(() => {
     let getRequestURL = "/api/articles?";
     getRequestURL += currentTopic ? `topic=${currentTopic}` : "";
@@ -30,6 +31,7 @@ const Articles = ({
 
     getRequestURL += sortBy ? `sort_by=${sortBy}` : "";
     getRequestURL += order && sortBy ? `&order=${order}` : "";
+    getRequestURL += `&p=${page}`;
 
     getRequest(getRequestURL)
       .then(({ articles }) => {
