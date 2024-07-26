@@ -18,9 +18,9 @@ export default function ArticleSidebar({ currentTopic }) {
       setWindowWidth(window.innerWidth);
 
       setWindowWidth((prevWidth) => {
-        if (window.innerWidth < 430) {
+        if (window.innerWidth <= 431) {
           setExpanded(false);
-          setMenuStyle("fixed z-1 bg-red-600/90 min-w-[160px] h-full  p-3");
+          setMenuStyle("fixed z-1 -translate-y-5 bg-red-600/90 min-w-[160px] h-full  p-3 rounded-r-[20px]");
         } else {
           setExpanded(true);
           setMenuStyle("min-w-[165px] p-3 ml-2");
@@ -40,7 +40,7 @@ export default function ArticleSidebar({ currentTopic }) {
       {expanded ? (
         <div className=" h-full border-r ">
           <section className={menuStyle}>
-            {windowWidth < 430 ? (
+            {windowWidth <= 431 ? (
               <CloseIcon onClick={() => setExpanded(false)} />
             ) : null}
             <h4 className="mb-4 font-bold mt-4">Topics</h4>
@@ -68,8 +68,11 @@ export default function ArticleSidebar({ currentTopic }) {
           </section>
         </div>
       ) : (
-        <div className="p-3 fixed z-1 ">
-          <MenuIcon onClick={() => setExpanded(true)} />
+        <div className="m-3 fixed  -translate-y-11 z-1 ">
+          <MenuIcon
+            onClick={() => setExpanded(true)}
+            className="border border-white rounded-full bg-white"
+          />
         </div>
       )}
     </div>
