@@ -1,21 +1,24 @@
 import { getRequest } from "../utils/api";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import ArticleCard from "./ArticleCard";
 import Loading from "./Loading";
 import ArticlesSideBar from "./ArticlesSideBar";
 import ErrorComponent from "./ErrorComponent";
 import ArticlesListOptions from "./ArticlesListOptions";
+import { TopicsContext } from "../contexts/TopicsContext";
+
 const Articles = ({
   listArticles,
   setlistArticles,
   isLoading,
   setIsLoading,
 }) => {
+  const { topics, awaitingTopics } = useContext(TopicsContext);
+
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentTopic, setCurrentTopic] = useState(searchParams.get("topic"));
   const [currentTopicDescription, setCurrentTopicDescription] = useState("");
-  const [topics, setTopics] = useState([]);
   const [sortBy, setSortBy] = useState(searchParams.get("sort_by"));
   const [order, setOrder] = useState(searchParams.get("order"));
   const [error, setError] = useState(null);
@@ -37,19 +40,17 @@ const Articles = ({
   }, [sortBy, order]);
 
   useEffect(() => {
-    getRequest("/api/topics").then(({ topics }) => {
-      setTopics(topics);
-
+    if (currentTopic && !awaitingTopics) {
       const currentTopicApi = topics.filter((apiTopic) => {
         return apiTopic.slug === currentTopic;
       });
       setCurrentTopicDescription(currentTopicApi[0].description);
-    });
+    }
   }, [currentTopic]);
 
   return (
     <div className="flex">
-      <ArticlesSideBar topics={topics} currentTopic={currentTopic} />
+      <ArticlesSideBar currentTopic={currentTopic} />
       <div>
         <div className="m-10">
           <div>
