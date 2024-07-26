@@ -51,6 +51,11 @@ const PostArticle = () => {
       .then(({ article }) => {
         setArticlePosted("success");
         setTimeout(() => {
+          setSelectedTopic("");
+          setNewTopic("");
+          setArticleTitle("");
+          setArticleBody("");
+          setArticleImg("");
           navigate(`/articles/${article.article_id}`);
         }, 3000);
       })
