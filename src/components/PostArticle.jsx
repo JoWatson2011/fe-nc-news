@@ -1,18 +1,21 @@
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import { useState, useContext } from "react";
-import { TopicsContext } from "../contexts/TopicsContext";
-import { TopicsDispatchContext } from "../contexts/TopicsContext";
-import Loading from "./Loading";
 import Button from "@mui/material/Button";
 import ReplayIcon from "@mui/icons-material/Replay";
 import PublishIcon from "@mui/icons-material/Publish";
+import { useState, useContext } from "react";
+import { Link } from "react-router-dom";
+import { TopicsContext } from "../contexts/TopicsContext";
+import { TopicsDispatchContext } from "../contexts/TopicsContext";
+import { UserContext } from "../contexts/UserContext";
 import { postRequest } from "../utils/api";
+import Loading from "./Loading";
 
 const PostArticle = () => {
   const { topics, awaitingTopics } = useContext(TopicsContext);
-  const dispatch  = useContext(TopicsDispatchContext);
+  const dispatch = useContext(TopicsDispatchContext);
+  const { user } = useContext(UserContext);
   const [selectedTopic, setSelectedTopic] = useState("");
   const [newTopic, setNewTopic] = useState("");
   const [newTopicDescription, setNewTopicDescription] = useState("");
@@ -28,7 +31,7 @@ const PostArticle = () => {
         description: newTopicDescription,
       }).then(({ topic }) => {
         dispatch({ type: "added", data: topic });
-      })
+      });
     }
   };
   const handleReset = (e) => {
@@ -42,6 +45,13 @@ const PostArticle = () => {
   return (
     <main>
       <h2 className=" font-mono text-[30px] ml-6">Post an article</h2>
+      <h3 className="ml-6">
+        {" "}
+        You are logged in as{" "}
+        <Link to="/account" className="text-red-700">
+          {user}
+        </Link>
+      </h3>
       <div className="m-auto w-[80%] flex flex-col">
         <Button
           variant="outlined"
