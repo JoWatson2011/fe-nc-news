@@ -1,6 +1,8 @@
 import { getRequest } from "../utils/api";
 import { useContext, useEffect, useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import ArticleCard from "./ArticleCard";
 import Loading from "./Loading";
 import ArticlesSideBar from "./ArticlesSideBar";
@@ -50,6 +52,25 @@ const Articles = ({
     }
   }, [currentTopic]);
 
+  const ArticlesNavButton = ({ icon, pageIncrement }) => {
+    console.log(page);
+
+    const handleClick = () => {
+      if (
+        (pageIncrement === -1 && page === 1) |
+        (pageIncrement === 1 && listArticles.length < 10)
+      )
+        return;
+      else {
+        setPage((currPage) => {
+          return currPage + pageIncrement;
+        });
+      }
+    };
+
+    return <button onClick={handleClick}>{icon}</button>;
+  };
+
   return (
     <div className="flex">
       <ArticlesSideBar currentTopic={currentTopic} />
@@ -98,6 +119,8 @@ const Articles = ({
             })}
           </div>
         )}
+        <ArticlesNavButton icon={<NavigateBeforeIcon />} pageIncrement={-1} />
+        <ArticlesNavButton icon={<NavigateNextIcon />} pageIncrement={1} />
       </div>
     </div>
   );
