@@ -22,7 +22,7 @@ export const TopicsProvider = ({ children }) => {
   }, []);
 
   return (
-    <TopicsContext.Provider value={{ topics, awaitingTopics }}>
+    <TopicsContext.Provider value={{ topics, setTopics, awaitingTopics }}>
       {children}
     </TopicsContext.Provider>
   );
