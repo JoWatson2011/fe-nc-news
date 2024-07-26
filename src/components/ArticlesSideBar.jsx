@@ -75,7 +75,8 @@ export default function ArticleSidebar({ currentTopic }) {
                       key={topic.slug}
                     >
                       <li className={topicSelectedClass} key={topic.slug}>
-                        {topic.slug}
+                        {topic.slug.slice(0, 1).toUpperCase() +
+                          topic.slug.slice(1)}
                       </li>
                     </Link>
                   );
