@@ -20,6 +20,12 @@ const PostArticle = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (newTopic) {
+      postRequest("/api/topics/", {
+        slug: newTopic,
+        description: newTopicDescription,
+      })
+    }
   };
   const handleReset = (e) => {
     e.preventDefault();
@@ -51,7 +57,6 @@ const PostArticle = () => {
                 value={selectedTopic}
                 onChange={(e) => setSelectedTopic(e.target.value)}
                 placeholder="Select a topic"
-                margin="normal"
                 className="w-[70%]"
               >
                 {[...topics, { slug: "Create new topic..." }].map((topic) => {
@@ -67,7 +72,6 @@ const PostArticle = () => {
                   <TextField
                     label="New topic name"
                     value={newTopic}
-                    margin="normal"
                     onChange={(e) => {
                       setNewTopic(e.target.value);
                     }}
