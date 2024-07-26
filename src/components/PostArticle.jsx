@@ -7,11 +7,13 @@ import Loading from "./Loading";
 import Button from "@mui/material/Button";
 import ReplayIcon from "@mui/icons-material/Replay";
 import PublishIcon from "@mui/icons-material/Publish";
+import { postRequest } from "../utils/api";
 
 const PostArticle = () => {
   const { topics, awaitingTopics } = useContext(TopicsContext);
   const [selectedTopic, setSelectedTopic] = useState("");
   const [newTopic, setNewTopic] = useState("");
+  const [newTopicDescription, setNewTopicDescription] = useState("");
   const [articleTitle, setArticleTitle] = useState("");
   const [articleBody, setArticleBody] = useState("");
   const [articleImg, setArticleImg] = useState("");
@@ -43,7 +45,7 @@ const PostArticle = () => {
           {awaitingTopics ? (
             <Loading />
           ) : (
-            <div className="flex justify-between">
+            <div>
               <Select
                 label="Select Topic"
                 value={selectedTopic}
@@ -61,14 +63,26 @@ const PostArticle = () => {
                 })}
               </Select>
               {selectedTopic === "Create new topic..." ? (
-                <TextField
-                  label="New topic name"
-                  value={newTopic}
-                  margin="normal"
-                  onChange={(e) => {
-                    setNewTopic(e.target.value);
-                  }}
-                />
+                <div className="flex justify-stretch w-[70%]">
+                  <TextField
+                    label="New topic name"
+                    value={newTopic}
+                    margin="normal"
+                    onChange={(e) => {
+                      setNewTopic(e.target.value);
+                    }}
+                    className="w-full"
+                  />
+                  <TextField
+                    label="Describe your new topic"
+                    value={newTopicDescription}
+                    margin="normal"
+                    onChange={(e) => {
+                      setNewTopicDescription(e.target.value);
+                    }}
+                    className="w-full"
+                  />
+                </div>
               ) : null}
             </div>
           )}
