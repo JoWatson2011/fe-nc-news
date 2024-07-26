@@ -31,8 +31,20 @@ const PostArticle = () => {
         description: newTopicDescription,
       }).then(({ topic }) => {
         dispatch({ type: "added", data: topic });
+        setSelectedTopic(topic.slug);
       });
     }
+
+    const postRequestParams = {
+      title: articleTitle,
+      topic: selectedTopic,
+      author: user,
+      body: articleBody,
+      article_img_url: articleImg,
+    };
+    console.log(postRequestParams);
+
+    postRequest("/api/articles", postRequestParams).then(({ article }) => {});
   };
   const handleReset = (e) => {
     e.preventDefault();
