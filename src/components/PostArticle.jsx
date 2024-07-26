@@ -78,6 +78,8 @@ const PostArticle = () => {
     setArticleBody("");
     setArticleImg("");
   };
+
+  const formInputStyleProps = { sx: { borderRadius: "30px" } };
   return (
     <main>
       <h2 className=" font-mono text-[30px] ml-6">Post an article</h2>
@@ -94,16 +96,25 @@ const PostArticle = () => {
           startIcon={<ReplayIcon />}
           onClick={handleReset}
           className="place-self-end"
+          sx={{
+            borderRadius: "30px",
+            color: "darkred",
+            border: "1px solid darkred",
+          }}
         >
           Reset
         </Button>
-        {fieldsNotFilled ? <p>Please fill in all required fields</p> : null}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="flex flex-col">
           {awaitingTopics ? (
             <Loading />
           ) : (
             <div>
-              <p className="mb-5"> * indicates required field</p>
+              <p> * indicates required field</p>
+              {fieldsNotFilled ? (
+                <p className=" text-red-700 mb-5">
+                  Please fill in all required fields
+                </p>
+              ) : null}
               <InputLabel htmlFor="select-topic">Select topic *</InputLabel>
               <Select
                 id="select-topic"
@@ -111,6 +122,7 @@ const PostArticle = () => {
                 onChange={(e) => setSelectedTopic(e.target.value)}
                 placeholder="Select a topic"
                 className="w-[70%]"
+                sx={{ borderRadius: "30px" }}
               >
                 {[...topics, { slug: "Create new topic..." }].map((topic) => {
                   return (
@@ -134,6 +146,7 @@ const PostArticle = () => {
                         setNewTopic(e.target.value);
                       }}
                       className="w-full"
+                      InputProps={formInputStyleProps}
                     />
                   </div>
                   <div className="w-full">
@@ -148,6 +161,7 @@ const PostArticle = () => {
                         setNewTopicDescription(e.target.value);
                       }}
                       className="w-full"
+                      InputProps={formInputStyleProps}
                     />
                   </div>
                 </div>
@@ -161,6 +175,7 @@ const PostArticle = () => {
             onChange={(e) => setArticleTitle(e.target.value)}
             margin="normal"
             className="w-full"
+            InputProps={formInputStyleProps}
           />
           <TextField
             label="Body *"
@@ -170,6 +185,7 @@ const PostArticle = () => {
             onChange={(e) => setArticleBody(e.target.value)}
             margin="normal"
             className="w-full"
+            InputProps={formInputStyleProps}
           />
           <TextField
             label="Article Image (URL)"
@@ -177,8 +193,19 @@ const PostArticle = () => {
             onChange={(e) => setArticleImg(e.target.value)}
             margin="normal"
             className="w-full"
+            InputProps={formInputStyleProps}
           />
-          <Button type="submit" variant="outlined" startIcon={<PublishIcon />}>
+          <Button
+            type="submit"
+            variant="outlined"
+            startIcon={<PublishIcon />}
+            sx={{
+              borderRadius: "30px",
+              color: "darkred",
+              border: "1px solid darkred",
+            }}
+            className="place-self-center"
+          >
             Post Article
           </Button>
         </form>
