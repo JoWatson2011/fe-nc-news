@@ -61,13 +61,6 @@ const Home = ({ listArticles, setlistArticles, isLoading, setIsLoading }) => {
               />
             );
           })}
-          {!isLoading ? (
-            <div className="m-auto">
-              <Link to="/articles">
-                <NavButton buttonText={"More Articles"} />
-              </Link>
-            </div>
-          ) : null}
         </div>
       </div>
     </div>
