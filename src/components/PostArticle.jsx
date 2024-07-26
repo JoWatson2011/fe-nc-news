@@ -4,6 +4,7 @@ import Select from "@mui/material/Select";
 import Button from "@mui/material/Button";
 import ReplayIcon from "@mui/icons-material/Replay";
 import PublishIcon from "@mui/icons-material/Publish";
+import InputLabel from "@mui/material/InputLabel";
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { TopicsContext } from "../contexts/TopicsContext";
@@ -102,8 +103,10 @@ const PostArticle = () => {
             <Loading />
           ) : (
             <div>
+              <p className="mb-5"> * indicates required field</p>
+              <InputLabel htmlFor="select-topic">Select topic *</InputLabel>
               <Select
-                label="Select Topic"
+                id="select-topic"
                 value={selectedTopic}
                 onChange={(e) => setSelectedTopic(e.target.value)}
                 placeholder="Select a topic"
@@ -118,38 +121,49 @@ const PostArticle = () => {
                 })}
               </Select>
               {selectedTopic === "Create new topic..." ? (
-                <div className="flex justify-stretch w-[70%]">
-                  <TextField
-                    label="New topic name"
-                    value={newTopic}
-                    onChange={(e) => {
-                      setNewTopic(e.target.value);
-                    }}
-                    className="w-full"
-                  />
-                  <TextField
-                    label="Describe your new topic"
-                    value={newTopicDescription}
-                    margin="normal"
-                    onChange={(e) => {
-                      setNewTopicDescription(e.target.value);
-                    }}
-                    className="w-full"
-                  />
+                <div className="flex items-center justify-stretch w-[70%] mt-3">
+                  <div className="w-full mr-3">
+                    <InputLabel htmlFor="new-topic-name">
+                      New Topic Name *
+                    </InputLabel>
+                    <TextField
+                      id="new-topic-name"
+                      value={newTopic}
+                      placeholder="Marshmallows"
+                      onChange={(e) => {
+                        setNewTopic(e.target.value);
+                      }}
+                      className="w-full"
+                    />
+                  </div>
+                  <div className="w-full">
+                    <InputLabel htmlFor="topic-description">
+                      Describe your new topic *
+                    </InputLabel>
+                    <TextField
+                      id="new-topic-name"
+                      value={newTopicDescription}
+                      placeholder="Fluffy pillows for your mouth"
+                      onChange={(e) => {
+                        setNewTopicDescription(e.target.value);
+                      }}
+                      className="w-full"
+                    />
+                  </div>
                 </div>
               ) : null}
             </div>
           )}
 
           <TextField
-            label="Title"
+            label="Title *"
             value={articleTitle}
             onChange={(e) => setArticleTitle(e.target.value)}
             margin="normal"
             className="w-full"
           />
           <TextField
-            label="Body"
+            label="Body *"
             multiline
             rows={4}
             value={articleBody}
