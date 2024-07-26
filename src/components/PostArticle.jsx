@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import ReplayIcon from "@mui/icons-material/Replay";
 import PublishIcon from "@mui/icons-material/Publish";
 import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TopicsContext } from "../contexts/TopicsContext";
 import { TopicsDispatchContext } from "../contexts/TopicsContext";
 import { UserContext } from "../contexts/UserContext";
@@ -16,12 +16,16 @@ const PostArticle = () => {
   const { topics, awaitingTopics } = useContext(TopicsContext);
   const dispatch = useContext(TopicsDispatchContext);
   const { user } = useContext(UserContext);
+
+  const navigate = useNavigate();
+
   const [selectedTopic, setSelectedTopic] = useState("");
   const [newTopic, setNewTopic] = useState("");
   const [newTopicDescription, setNewTopicDescription] = useState("");
   const [articleTitle, setArticleTitle] = useState("");
   const [articleBody, setArticleBody] = useState("");
   const [articleImg, setArticleImg] = useState("");
+  const [articlePosted, setArticlePosted] = useState("No");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,9 +46,17 @@ const PostArticle = () => {
       body: articleBody,
       article_img_url: articleImg,
     };
-    console.log(postRequestParams);
 
-    postRequest("/api/articles", postRequestParams).then(({ article }) => {});
+    postRequest("/api/articles", postRequestParams)
+      .then(({ article }) => {
+        setArticlePosted("success");
+        setTimeout(() => {
+          navigate(`/articles/${article.article_id}`);
+        }, 3000);
+      })
+      .catch(() => {
+        setArticlePosted("error");
+      });
   };
   const handleReset = (e) => {
     e.preventDefault();
@@ -144,6 +156,16 @@ const PostArticle = () => {
             Post Article
           </Button>
         </form>
+        {articlePosted === "success" ? (
+          <p className="text-green-700">
+            Article Posted! Navigating to new article...
+          </p>
+        ) : null}
+        {articlePosted === "error" ? (
+          <p className="text-red-700">
+            Error posting article. Please try again later.
+          </p>
+        ) : null}
       </div>
     </main>
   );
