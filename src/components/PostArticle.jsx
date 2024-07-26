@@ -26,6 +26,7 @@ const PostArticle = () => {
   const [articleBody, setArticleBody] = useState("");
   const [articleImg, setArticleImg] = useState("");
   const [articlePosted, setArticlePosted] = useState("No");
+  const [fieldsNotFilled, setFieldsNotFilled] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,6 +38,11 @@ const PostArticle = () => {
         dispatch({ type: "added", data: topic });
         setSelectedTopic(topic.slug);
       });
+    }
+
+    if (!articleTitle || !articleBody || !user || !selectedTopic) {
+      setFieldsNotFilled(true);
+      return;
     }
 
     const postRequestParams = {
@@ -90,6 +96,7 @@ const PostArticle = () => {
         >
           Reset
         </Button>
+        {fieldsNotFilled ? <p>Please fill in all required fields</p> : null}
         <form onSubmit={handleSubmit}>
           {awaitingTopics ? (
             <Loading />
