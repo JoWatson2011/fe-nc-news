@@ -9,6 +9,7 @@ import ArticlesSideBar from "./ArticlesSideBar";
 import ErrorComponent from "./ErrorComponent";
 import ArticlesListOptions from "./ArticlesListOptions";
 import { TopicsContext } from "../contexts/TopicsContext";
+import Pagination from "@mui/material/Pagination";
 
 const Articles = ({
   listArticles,
@@ -26,6 +27,7 @@ const Articles = ({
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [totalArticleCount, setTotalArticleCount] = useState(0);
+
   useEffect(() => {
     let getRequestURL = "/api/articles?";
     getRequestURL += currentTopic ? `topic=${currentTopic}` : "";
@@ -36,13 +38,13 @@ const Articles = ({
     getRequestURL += order && sortBy ? `&order=${order}` : "";
     getRequestURL += `&p=${page}`;
 
-    getRequest(getRequestURL)
-      .then((body) => {
-        const { articles, total_count } = body;
-        setTotalArticleCount(total_count);
-        setlistArticles(articles);
-        setIsLoading(false);
-      })
+    console.log(page);
+    getRequest(getRequestURL).then((body) => {
+      const { articles, total_count } = body;
+      setTotalArticleCount(total_count);
+      setlistArticles(articles);
+      setIsLoading(false);
+    });
   }, [sortBy, order, page]);
 
   useEffect(() => {
@@ -53,25 +55,6 @@ const Articles = ({
       setCurrentTopicDescription(currentTopicApi[0].description);
     }
   }, [currentTopic]);
-
-  const ArticlesNavButton = ({ icon, pageIncrement }) => {
-    console.log(page);
-
-    const handleClick = () => {
-      if (
-        (pageIncrement === -1 && page === 1) |
-        (pageIncrement === 1 && listArticles.length < 10)
-      )
-        return;
-      else {
-        setPage((currPage) => {
-          return currPage + pageIncrement;
-        });
-      }
-    };
-
-    return <button onClick={handleClick}>{icon}</button>;
-  };
 
   return (
     <div className="flex">
@@ -121,8 +104,13 @@ const Articles = ({
             })}
           </div>
         )}
-        <ArticlesNavButton icon={<NavigateBeforeIcon />} pageIncrement={-1} />
-        <ArticlesNavButton icon={<NavigateNextIcon />} pageIncrement={1} />
+        <Pagination
+          count={Math.ceil(totalArticleCount / 10)}
+          onChange={(e, page) => {
+            e.preventDefault();
+            setPage(page);
+          }}
+        />
       </div>
     </div>
   );
