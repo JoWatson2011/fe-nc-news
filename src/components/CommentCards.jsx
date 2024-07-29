@@ -5,7 +5,7 @@ import { UserContext } from "../contexts/UserContext";
 import { deleteRequest } from "../utils/api";
 
 function CommentCard({ comment, setComments, setDeleteSuccessful }) {
-  const { user } = useContext(UserContext);
+  const { userDetails } = useContext(UserContext);
   const [deleteRequestSent, setDeleteRequestSent] = useState(false);
 
   const handleDeleteComment = (e) => {
@@ -42,7 +42,7 @@ function CommentCard({ comment, setComments, setDeleteSuccessful }) {
       <p className=" col-span-2" data-cy="body">
         {comment.body}
       </p>
-      {user === comment.author ? (
+      {userDetails.username === comment.author ? (
         <button
           type="button"
           onClick={handleDeleteComment}
