@@ -1,19 +1,34 @@
-import { createContext } from "react";
-import { useState } from "react";
+import { createContext, useReducer, useState, useEffect } from "react";
 export const UserContext = createContext();
+export const UserDispatchContext = createContext();
+
+export const usersReducer = (user, action) => {
+  switch (action.type) {
+    case "login": {
+      return action.data;
+    }
+    case "login": {
+      return "";
+    }
+  }
+};
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState("jessjelly");
-  const [userDetails, setUserDetails] = useState({
-    username: "jessjelly",
-    name: "Jess Jelly",
-    avatar_url:
-      "https://vignette.wikia.nocookie.net/mrmen/images/4/4f/MR_JELLY_4A.jpg/revision/latest?cb=20180104121141",
-  });
+  const [userDetails, dispatch] = useReducer(
+    usersReducer,
+    {},
+    (initial) => JSON.parse(localStorage.getItem("userDetails")) || initial
+  );
+  useEffect(() => {
+    localStorage.setItem("userDetails", JSON.stringify(userDetails));
+  }, [userDetails]);
+  console.log(userDetails);
 
   return (
-    <UserContext.Provider value={{ user, userDetails }}>
-      {children}
+    <UserContext.Provider value={{ userDetails }}>
+      <UserDispatchContext.Provider value={dispatch}>
+        {children}
+      </UserDispatchContext.Provider>
     </UserContext.Provider>
   );
 };

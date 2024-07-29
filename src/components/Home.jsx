@@ -37,14 +37,23 @@ const Home = ({ listArticles, setlistArticles, isLoading, setIsLoading }) => {
       <ArticleSidebar />
       <div className="ml-10">
         <div className="flex items-center mb-10">
-          <img
-            src={userDetails.avatar_url}
-            className="rounded-full border-2 border-red-800 h-[70px] mr-5"
-          ></img>
-          <h2 className="font-mono text-[30px]">
-            Welcome back{" "}
-            <span className="text-red-800 ">{userDetails.username}!</span>
-          </h2>
+          {userDetails.avatar_url ? (
+            <img
+              src={userDetails.avatar_url}
+              className="rounded-full border-2 border-red-800 h-[70px] mr-5"
+            />
+          ) : null}
+          {userDetails.username ? (
+            <h2 className="font-mono text-[30px]">
+              Welcome back{" "}
+              <span className="text-red-800 ">{userDetails.username}!</span>
+            </h2>
+          ) : (
+            <div>
+              <h2 className="font-mono text-[30px]">Welcome!</h2>
+              <p></p>
+            </div>
+          )}
         </div>
         <h3 className="font-mono text-[30px]">{`${date.getDate()} ${
           months[date.getMonth()]

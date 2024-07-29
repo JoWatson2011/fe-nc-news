@@ -6,11 +6,11 @@ import FaceIcon from "@mui/icons-material/Face";
 import LoginIcon from "@mui/icons-material/Login";
 import NavButton from "./NavButton";
 const NavMenu = () => {
-  const { user } = useContext(UserContext);
+  const { userDetails } = useContext(UserContext);
 
   return (
     <div>
-      {user ? (
+      {userDetails.username ? (
         <div className="flex">
           <Link to="/articles/post">
             <NavButton buttonText={"Post Article"} icon={<AddIcon />} />
