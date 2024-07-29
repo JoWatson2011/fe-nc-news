@@ -16,7 +16,7 @@ Details of the back-end can be found
 
 - ~~Pagination of articles and comments~~ _PR #24_
 - ~~Post an article~~ _PR #22_
-- Change which user you are logged in as
+- ~~Change which user you are logged in as~~
 - View details of logged in user's account
 
 ### Install & run locally
