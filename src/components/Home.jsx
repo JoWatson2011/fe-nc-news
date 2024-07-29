@@ -40,7 +40,7 @@ const Home = ({ listArticles, setlistArticles, isLoading, setIsLoading }) => {
           {userDetails.avatar_url ? (
             <img
               src={userDetails.avatar_url}
-              className="rounded-full border-2 border-red-800 h-[70px] mr-5"
+              className="rounded-full border-2 border-red-800 h-[70px] mr-5 p-1"
             />
           ) : null}
           {userDetails.username ? (

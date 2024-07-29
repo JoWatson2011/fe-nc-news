@@ -45,13 +45,13 @@ const Articles = ({
   }, [sortBy, order, page]);
 
   useEffect(() => {
-    if (currentTopic && !awaitingTopics) {
+    if (!!currentTopic && !!!awaitingTopics) {
       const currentTopicApi = topics.filter((apiTopic) => {
         return apiTopic.slug === currentTopic;
       });
       setCurrentTopicDescription(currentTopicApi[0].description);
     }
-  }, [currentTopic]);
+  }, [currentTopic, awaitingTopics]);
 
   return (
     <div className="flex">

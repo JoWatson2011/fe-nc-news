@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Loading from "./Loading";
 import LikeButton from "./LikeButton";
 import { UserContext } from "../contexts/UserContext";
@@ -32,7 +33,7 @@ function CommentCard({ comment, setComments, setDeleteSuccessful }) {
   };
 
   return (
-    <div className=" grid grid-rows-2 grid-cols-3 border-s-black border p-2 rounded">
+    <div className=" grid grid-rows-2 grid-cols-3 border-s-black border p-2 rounded items-center justify-items-center">
       <h4 className=" font-bold">{comment.author}</h4>
       <p className=" italic" data-cy="date">
         {comment.created_at.slice(0, 10)}
@@ -46,10 +47,10 @@ function CommentCard({ comment, setComments, setDeleteSuccessful }) {
         <button
           type="button"
           onClick={handleDeleteComment}
-          className=" hover:bg-red-900 rounded-full border"
+          className=" hover:bg-red-900 rounded-full border p-2"
           value={comment.comment_id}
         >
-          Delete comment
+          <DeleteForeverIcon/>
         </button>
       ) : null}
       {deleteRequestSent ? <Loading /> : null}

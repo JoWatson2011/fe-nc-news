@@ -53,11 +53,13 @@ export default function ArticleSidebar({ currentTopic }) {
                 buttonText={"Trending"}
                 handleClick={() => navigate("/")}
                 icon={<TrendingUpIcon />}
+                id="/"
               />
               <NavButton
                 buttonText={"All Articles"}
                 handleClick={() => navigate("/articles")}
                 icon={<PublicIcon />}
+                id="articles"
               />
             </div>
             <h4 className="mb-4 font-bold mt-4">Topics</h4>

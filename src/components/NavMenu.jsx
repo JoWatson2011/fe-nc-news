@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import { useContext } from "react";
 import AddIcon from "@mui/icons-material/Add";
@@ -7,22 +7,38 @@ import LoginIcon from "@mui/icons-material/Login";
 import NavButton from "./NavButton";
 const NavMenu = () => {
   const { userDetails } = useContext(UserContext);
+  const navigate = useNavigate();
 
   return (
     <div>
       {userDetails.username ? (
         <div className="flex">
-          <Link to="/articles/post">
-            <NavButton buttonText={"Post Article"} icon={<AddIcon />} />
-          </Link>
-          <Link to="/account">
-            <NavButton buttonText={"My Account"} icon={<FaceIcon />} />
-          </Link>
+          <NavButton
+            buttonText={"Post Article"}
+            icon={<AddIcon />}
+            handleClick={() => {
+              navigate("/articles/post");
+            }}
+            id="post"
+          />
+          <NavButton
+            buttonText={"My Account"}
+            icon={<FaceIcon />}
+            handleClick={() => {
+              navigate("/account");
+            }}
+            id="account"
+          />
         </div>
       ) : (
-        <Link to="login">
-          <NavButton buttonText={"Log In"} icon={<LoginIcon />} />
-        </Link>
+        <NavButton
+          buttonText={"Log In"}
+          icon={<LoginIcon />}
+          handleClick={() => {
+            navigate("/login");
+          }}
+          id={"login"}
+        />
       )}
     </div>
   );
