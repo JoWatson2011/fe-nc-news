@@ -7,6 +7,7 @@ import ArticlesSideBar from "./ArticlesSideBar";
 import ErrorComponent from "./ErrorComponent";
 import ArticlesListOptions from "./ArticlesListOptions";
 import { TopicsContext } from "../contexts/TopicsContext";
+import Pagination from "@mui/material/Pagination";
 
 const Articles = ({
   listArticles,
@@ -22,6 +23,9 @@ const Articles = ({
   const [sortBy, setSortBy] = useState(searchParams.get("sort_by"));
   const [order, setOrder] = useState(searchParams.get("order"));
   const [error, setError] = useState(null);
+  const [page, setPage] = useState(1);
+  const [totalArticleCount, setTotalArticleCount] = useState(0);
+
   useEffect(() => {
     let getRequestURL = "/api/articles?";
     getRequestURL += currentTopic ? `topic=${currentTopic}` : "";
@@ -30,14 +34,15 @@ const Articles = ({
 
     getRequestURL += sortBy ? `sort_by=${sortBy}` : "";
     getRequestURL += order && sortBy ? `&order=${order}` : "";
+    getRequestURL += `&p=${page}`;
 
-    getRequest(getRequestURL)
-      .then(({ articles }) => {
-        setlistArticles(articles);
-        setIsLoading(false);
-      })
-      .catch((err) => setError(err));
-  }, [sortBy, order]);
+    getRequest(getRequestURL).then((body) => {
+      const { articles, total_count } = body;
+      setTotalArticleCount(total_count);
+      setlistArticles(articles);
+      setIsLoading(false);
+    });
+  }, [sortBy, order, page]);
 
   useEffect(() => {
     if (currentTopic && !awaitingTopics) {
@@ -91,9 +96,19 @@ const Articles = ({
                   article={article}
                   setArticle={setlistArticles}
                   key={article.article_id}
+                  className=" w-full"
                 />
               );
             })}
+            <div className="flex justify-center pb-10 pt-3 w-full">
+              <Pagination
+                count={Math.ceil(totalArticleCount / 10)}
+                onChange={(e, page) => {
+                  e.preventDefault();
+                  setPage(page);
+                }}
+              />
+            </div>
           </div>
         )}
       </div>
