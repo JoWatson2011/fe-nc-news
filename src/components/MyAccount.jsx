@@ -12,6 +12,8 @@ const MyAccount = () => {
 
   const [userArticles, setUserArticles] = useState([]);
 
+  if (!userDetails.username) navigate("/login");
+
   useEffect(() => {
     getRequest("/api/articles").then(({ articles }) => {
       const userArticles = articles.filter(

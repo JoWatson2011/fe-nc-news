@@ -20,6 +20,8 @@ const PostArticle = () => {
 
   const navigate = useNavigate();
 
+  if (!userDetails.username) navigate("/login");
+
   const [selectedTopic, setSelectedTopic] = useState("");
   const [newTopic, setNewTopic] = useState("");
   const [newTopicDescription, setNewTopicDescription] = useState("");
@@ -41,7 +43,12 @@ const PostArticle = () => {
       });
     }
 
-    if (!articleTitle || !articleBody || !userDetails.username || !selectedTopic) {
+    if (
+      !articleTitle ||
+      !articleBody ||
+      !userDetails.username ||
+      !selectedTopic
+    ) {
       setFieldsNotFilled(true);
       return;
     }
