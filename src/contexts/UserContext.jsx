@@ -7,8 +7,8 @@ export const usersReducer = (user, action) => {
     case "login": {
       return action.data;
     }
-    case "login": {
-      return "";
+    case "logout": {
+      return {};
     }
   }
 };
