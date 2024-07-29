@@ -13,14 +13,9 @@ const LogIn = () => {
   const [loginPassword, setLoginPassword] = useState("");
   const [loginError, setLoginError] = useState("");
 
-  const handleTestUserLogIn = (e) => {
-    e.preventDefault();
-  };
-  const handleLogInSubmit = async (e) => {
-    e.preventDefault();
-
+  const attemptLogin = async (username) => {
     try {
-      const { user } = await getRequest(`api/users/${loginUserName}`);
+      const { user } = await getRequest(`api/users/${username}`);
       dispatch({ type: "login", data: user });
       navigate("/");
     } catch (err) {
@@ -29,6 +24,17 @@ const LogIn = () => {
     }
     setLoginUserName("");
     setLoginPassword("");
+  };
+
+  const handleTestUserLogIn = (e) => {
+    e.preventDefault();
+
+    attemptLogin("weegembump");
+  };
+  const handleLogInSubmit = (e) => {
+    e.preventDefault();
+
+    attemptLogin(loginUserName);
   };
 
   return (
