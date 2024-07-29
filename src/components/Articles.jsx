@@ -1,8 +1,6 @@
 import { getRequest } from "../utils/api";
 import { useContext, useEffect, useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import ArticleCard from "./ArticleCard";
 import Loading from "./Loading";
 import ArticlesSideBar from "./ArticlesSideBar";
@@ -38,7 +36,6 @@ const Articles = ({
     getRequestURL += order && sortBy ? `&order=${order}` : "";
     getRequestURL += `&p=${page}`;
 
-    console.log(page);
     getRequest(getRequestURL).then((body) => {
       const { articles, total_count } = body;
       setTotalArticleCount(total_count);
@@ -99,18 +96,21 @@ const Articles = ({
                   article={article}
                   setArticle={setlistArticles}
                   key={article.article_id}
+                  className=" w-full"
                 />
               );
             })}
+            <div className="flex justify-center pb-10 pt-3 w-full">
+              <Pagination
+                count={Math.ceil(totalArticleCount / 10)}
+                onChange={(e, page) => {
+                  e.preventDefault();
+                  setPage(page);
+                }}
+              />
+            </div>
           </div>
         )}
-        <Pagination
-          count={Math.ceil(totalArticleCount / 10)}
-          onChange={(e, page) => {
-            e.preventDefault();
-            setPage(page);
-          }}
-        />
       </div>
     </div>
   );
