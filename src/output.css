@@ -787,6 +787,10 @@ video {
   max-width: 120px;
 }
 
+.max-w-\[60\%\] {
+  max-width: 60%;
+}
+
 .grow {
   flex-grow: 1;
 }
@@ -1045,6 +1049,10 @@ video {
   padding: 2rem;
 }
 
+.p-5 {
+  padding: 1.25rem;
+}
+
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -1101,6 +1109,10 @@ video {
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
+}
+
+.text-\[25px\] {
+  font-size: 25px;
 }
 
 .font-bold {
