@@ -50,7 +50,7 @@ const MyAccount = () => {
         <h3 className="text-[20px] font-mono ">Your articles</h3>
         <section className=" border border-grey p-5 rounded-[20px]">
           {userArticles.map((article) => {
-            return <ArticleCard article={article} />;
+            return <ArticleCard article={article} key={article.article_id} />;
           })}
         </section>
       </div>
