@@ -12,6 +12,13 @@ It has been built with **react**, styled with **tailwind** and hosted with
 Details of the back-end can be found
 [here](https://github.com/JoWatson2011/nc-news)
 
+#### Features to Add
+
+- ~~Pagination of articles and comments~~ _PR #24_
+- ~~Post an article~~ _PR #22_
+- Change which user you are logged in as
+- View details of logged in user's account
+
 ### Install & run locally
 
 1. Clone the repository:
@@ -42,12 +49,7 @@ component and how to responsibly set state and pass down data on props.
 ![ReactState](https://github.com/JoWatson2011/fe-nc-news/blob/main/assets/plan-state.png?raw=true)
 ![ComponentTree](https://github.com/JoWatson2011/fe-nc-news/blob/main/assets/plan-component-tree.png?raw=true)
 
-#### Features to Add
 
-- Pagination of articles and comments
-- Post an article
-- Change which user you are logged in as
-- View details of logged in user's account
 
 ---
 
