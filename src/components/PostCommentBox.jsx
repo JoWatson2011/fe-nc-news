@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, useRef } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import { postRequest } from "../utils/api";
@@ -10,7 +10,7 @@ const PostCommentBox = ({
 }) => {
   const { article_id } = useParams();
 
-  const { user } = useContext(UserContext);
+  const { userDetails } = useContext(UserContext);
 
   const [error, setError] = useState(null);
 
@@ -42,7 +42,7 @@ const PostCommentBox = ({
     postRequest(`/api/articles/${article_id}/comments`, {
       body: newComment,
       article_id: article_id,
-      username: user,
+      username: userDetails.username,
       params: { article_id },
     })
       .then(() => {
