@@ -22,7 +22,6 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("userDetails", JSON.stringify(userDetails));
   }, [userDetails]);
-  console.log(userDetails);
 
   return (
     <UserContext.Provider value={{ userDetails }}>
