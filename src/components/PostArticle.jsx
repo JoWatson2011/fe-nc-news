@@ -16,7 +16,7 @@ import Loading from "./Loading";
 const PostArticle = () => {
   const { topics, awaitingTopics } = useContext(TopicsContext);
   const dispatch = useContext(TopicsDispatchContext);
-  const { user } = useContext(UserContext);
+  const { userDetails } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -41,7 +41,7 @@ const PostArticle = () => {
       });
     }
 
-    if (!articleTitle || !articleBody || !user || !selectedTopic) {
+    if (!articleTitle || !articleBody || !userDetails.username || !selectedTopic) {
       setFieldsNotFilled(true);
       return;
     }
@@ -49,7 +49,7 @@ const PostArticle = () => {
     const postRequestParams = {
       title: articleTitle,
       topic: selectedTopic,
-      author: user,
+      author: userDetails.username,
       body: articleBody,
       article_img_url: articleImg,
     };
@@ -87,7 +87,7 @@ const PostArticle = () => {
         {" "}
         You are logged in as{" "}
         <Link to="/account" className="text-red-700">
-          {user}
+          {userDetails.username}
         </Link>
       </h3>
       <div className="m-auto w-[80%] flex flex-col">
