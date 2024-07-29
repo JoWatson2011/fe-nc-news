@@ -13,6 +13,8 @@ const LogIn = () => {
   };
   const handleLogInSubmit = (e) => {
     e.preventDefault();
+    setLoginUserName("");
+    setLoginPassword("");
   };
 
   return (
@@ -49,12 +51,16 @@ const LogIn = () => {
           <TextField
             label="Username"
             id="login-username"
+            value={loginUserName}
+            onChange={(e) => setLoginUserName(e.target.value)}
             InputProps={{ sx: { borderRadius: "30px" } }}
           />
           <TextField
             label="Password"
             id="login-password"
             type="password"
+            value={loginPassword}
+            onChange={(e) => setLoginPassword(e.target.value)}
             InputProps={{ sx: { borderRadius: "30px" } }}
           />
           <Button
