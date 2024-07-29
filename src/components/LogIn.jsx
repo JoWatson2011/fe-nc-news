@@ -33,8 +33,11 @@ const LogIn = () => {
   };
   const handleLogInSubmit = (e) => {
     e.preventDefault();
-
-    attemptLogin(loginUserName);
+    if (!loginUserName) {
+      setLoginError("Please enter your user details");
+    } else {
+      attemptLogin(loginUserName);
+    }
   };
 
   return (
@@ -83,6 +86,7 @@ const LogIn = () => {
             onChange={(e) => setLoginPassword(e.target.value)}
             InputProps={{ sx: { borderRadius: "30px" } }}
           />
+          {loginError ? <p className="text-red-800 italic">{loginError}</p> : null}
           <Button
             type="submit"
             sx={{
