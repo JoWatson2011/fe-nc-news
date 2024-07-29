@@ -1,18 +1,32 @@
 import { useContext, useState } from "react";
-import { UserContext } from "../contexts/UserContext";
+import { UserDispatchContext } from "../contexts/UserContext";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { getRequest } from "../utils/api";
+import { useNavigate } from "react-router-dom";
 
 const LogIn = () => {
-  const { userDetails } = useContext(UserContext);
+  const dispatch = useContext(UserDispatchContext);
+  const navigate = useNavigate();
+
   const [loginUserName, setLoginUserName] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
 
   const handleTestUserLogIn = (e) => {
     e.preventDefault();
   };
-  const handleLogInSubmit = (e) => {
+  const handleLogInSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+      const { user } = await getRequest(`api/users/${loginUserName}`);
+      dispatch({ type: "login", data: user });
+      navigate("/");
+    } catch (err) {
+      setLoginError("Cannot find user details, please try again");
+      console.log(err);
+    }
     setLoginUserName("");
     setLoginPassword("");
   };
