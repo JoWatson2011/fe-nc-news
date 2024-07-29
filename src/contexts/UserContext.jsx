@@ -1,5 +1,4 @@
-import { createContext, useReducer } from "react";
-import { useState } from "react";
+import { createContext, useReducer, useState, useEffect } from "react";
 export const UserContext = createContext();
 export const UserDispatchContext = createContext();
 
@@ -15,7 +14,15 @@ export const usersReducer = (user, action) => {
 };
 
 export const UserProvider = ({ children }) => {
-  const [userDetails, dispatch] = useReducer(usersReducer, {});
+  const [userDetails, dispatch] = useReducer(
+    usersReducer,
+    {},
+    (initial) => JSON.parse(localStorage.getItem("userDetails")) || initial
+  );
+  useEffect(() => {
+    localStorage.setItem("userDetails", JSON.stringify(userDetails));
+  }, [userDetails]);
+  console.log(userDetails);
 
   return (
     <UserContext.Provider value={{ userDetails }}>
