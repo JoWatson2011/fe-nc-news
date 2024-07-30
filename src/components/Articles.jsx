@@ -54,7 +54,7 @@ const Articles = ({
   }, [currentTopic, awaitingTopics]);
 
   return (
-    <div className="flex">
+    <div className="relative flex">
       <ArticlesSideBar currentTopic={currentTopic} />
       <div>
         <div className="m-10">

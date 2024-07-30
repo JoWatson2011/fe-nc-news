@@ -24,7 +24,7 @@ export default function ArticleSidebar({ currentTopic }) {
         if (window.innerWidth <= 431) {
           setExpanded(false);
           setMenuStyle(
-            "fixed z-1 -translate-y-5 bg-red-600/90 min-w-[160px] h-full  p-3 rounded-r-[20px]"
+            "fixed z-1 top-0 bg-red-600/90 min-w-[160px] h-full  p-3 rounded-r-[20px]"
           );
         } else {
           setExpanded(true);
@@ -88,12 +88,10 @@ export default function ArticleSidebar({ currentTopic }) {
           </section>
         </div>
       ) : (
-        <div id = "nav-menu-icon" className="m-3 fixed  -translate-y-11 z-1 ">
-          <MenuIcon
-            onClick={() => setExpanded(true)}
-            className="border border-white rounded-full bg-white"
-          />
-        </div>
+        <MenuIcon
+          onClick={() => setExpanded(true)}
+          className=" fixed top-5 left-0 z-10 border border-white rounded-full bg-white m-3"
+        />
       )}
     </>
   );
