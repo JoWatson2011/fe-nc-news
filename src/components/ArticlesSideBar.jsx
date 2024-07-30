@@ -41,9 +41,9 @@ export default function ArticleSidebar({ currentTopic }) {
   }, []);
 
   return (
-    <div>
+    <>
       {expanded ? (
-        <div className=" h-full border-r">
+        <div id="exapnded-nav" className=" h-full border-r">
           <section className={menuStyle}>
             {windowWidth <= 431 ? (
               <CloseIcon onClick={() => setExpanded(false)} />
@@ -88,13 +88,13 @@ export default function ArticleSidebar({ currentTopic }) {
           </section>
         </div>
       ) : (
-        <div className="m-3 fixed  -translate-y-11 z-1 ">
+        <div id = "nav-menu-icon" className="m-3 fixed  -translate-y-11 z-1 ">
           <MenuIcon
             onClick={() => setExpanded(true)}
             className="border border-white rounded-full bg-white"
           />
         </div>
       )}
-    </div>
+    </>
   );
 }
