@@ -1,7 +1,7 @@
 # nc news
 
 [**nc news**](https://jowatson-portfolio-nc-news.netlify.app) is a social news
-aggregation, web content reating and discussion website. Users can post articles
+aggregation, web content rating and discussion website, similar to Reddit. Users can post articles
 and interact with posted articles by adding comments and upvoting/downvoting.
 
 
